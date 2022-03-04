@@ -32,9 +32,12 @@ else
 fi
 }
 
+source ~/.config/.git-prompt.sh
+
 # PS1="\$(value)\[\e[1;33m\][\A \W] \[\e[0;36m\]WuCFE\$ \[$white\]"
 _set_my_PS1() {
-    PS1="\[\e[1;33m\]\$(value) [\A \w]$cyan WuCFE\$ $white"
+    # PS1="\[\e[1;33m\]\$(value) \A \w $cyan \nWuCFE\$ $white"
+    PS1="$blue"'$(__git_ps1 " (%s)")'"$white \w > "
     if [ "$(whoami)" = "liveuser" ] ; then
         local iso_version="$(grep ^VERSION= /usr/lib/endeavouros-release 2>/dev/null | cut -d '=' -f 2)"
         if [ -n "$iso_version" ] ; then
@@ -57,6 +60,7 @@ ShowInstallerIsoInfo() {
 }
 
 
+alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o'
 alias sshgit='ssh-agent > tmp && . ./tmp && rm tmp && ssh-add'
 alias ls='ls --color=auto'
 alias tree='tree -C'
@@ -220,3 +224,7 @@ export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+export PGDATA="$HOME/postgres_data"
+export PGHOST="/tmp"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
