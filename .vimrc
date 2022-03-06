@@ -1,49 +1,39 @@
 " ~/.vimrc
 
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin indent on
 
 runtime! plugin/sensible.vim
 
 call plug#begin('~/.vim/plugged')
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align 
 Plug 'junegunn/vim-easy-align'
 
-" On-demand loading
+" nerd tree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" auto comp
-Plug 'vim-scripts/AutoComplPop'
-
-" Plugin font
-Plug 'tomasr/molokai'
+" Color schemes
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/vim-color-forest-night'
-" Plug 'flazz/vim-colorschemes'
 Plug 'sonph/onehalf'
-
-" Plug 'vim-airline/vim-airline'
+Plug 'dracula/vim', { 'name': 'dracula' }
 
 Plug 'scrooloose/syntastic'
 
 " Clang
 Plug 'rhysd/vim-clang-format'
 
+" Utils
 Plug 'bfrg/vim-cpp-modern'
-
 Plug 'vifm/vifm.vim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
-Plug 'dracula/vim', { 'name': 'dracula' }
-
 Plug 'ap/vim-css-color'
-
+Plug 'vim-scripts/AutoComplPop'
 
 " Initialize plugin system
 call plug#end()
@@ -65,8 +55,8 @@ set incsearch
 " set noswapfile
 
 " space help
-" :set list
-" :set listchars:eol:$,trail:.
+:set list
+:set listchars:trail:.
 
 " tab help
 set expandtab
@@ -91,7 +81,7 @@ let &t_SR = "\<esc>[4 q"  " solid underline in replace mode
 let &t_EI = "\<esc>[2 q"  " default cursor solid block otherwise
 
 set number
-set cc=80
+set tw=80
 
 let g:clang_format#auto_format = 1
 
@@ -116,9 +106,10 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-tab> <c-n>
 inoremap jk <ESC>
 inoremap {<CR> <ESC>o{<CR>}<UP><CR>
-           " Echo line's diagnostic that cursor is on
 
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'wombat',
       \ }
 let &t_ut=''
+set laststatus=2
+set noshowmode " because we already have lightline
