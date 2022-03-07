@@ -233,6 +233,7 @@ export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
 export LESS_TERMCAP_mb=$'\e[1;34m'
 export LESS_TERMCAP_md=$'\e[1;34m'
 export LESS_TERMCAP_me=$'\e[0m'
