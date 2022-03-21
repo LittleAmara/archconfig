@@ -63,8 +63,9 @@ ShowInstallerIsoInfo() {
     fi
 }
 
-
-alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o'
+alias todo='vim ~/.todo'
+alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o out'
+alias 'fg+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -g -fsanitize=address -o out'
 alias sshgit='ssh-agent > tmp && . ./tmp && rm tmp && ssh-add'
 alias ls='ls --color=auto'
 alias tree='tree -C'
