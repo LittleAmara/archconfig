@@ -41,8 +41,8 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+ && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%- && pkill -RTMIN+2 i3blocks
 bindsym XF86AudioMute exec amixer -q sset Master toggle
 #bindsym XF86AudioMicMute exec amixer -q sset Master toggle
 
@@ -64,10 +64,10 @@ bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -165,11 +165,11 @@ set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
 
 # define colors for windows:
-#class                  border          bground         text    indicator       child_border
-client.focused          $light_purple   $light_purple   $white  $light_purple   $light_purple
-client.unfocused        $darkblue       $darkblue       $grey   $mediumgrey     $darkgrey
-client.focused_inactive $darkblue       $darkblue       $grey   $mediumgrey     $black
-client.urgent           $urgentred      $urgentred      $white  $mediumgrey     $yellowbrown
+#class                  border          bground         text        indicator       child_border
+client.focused          $light_purple   $light_purple   $darkgrey   $light_purple   $light_purple
+client.unfocused        $darkblue       $darkblue       $darkgrey   $mediumgrey     $darkgrey
+client.focused_inactive $darkblue       $darkblue       $darkgrey   $mediumgrey     $black
+client.urgent           $urgentred      $urgentred      $darkgrey   $mediumgrey     $yellowbrown
 
 
 # reload the configuration file
@@ -178,6 +178,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+l exec xfce4-screensaver-command --lock
 
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 # bindsym $mod+Shift+e exec xfce4-session-logout
@@ -215,8 +217,12 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        position top
+        font pango:Fira Code Mono 9, FontAwesome 9
+		status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	    	position top
+		    tray_output primary
+		    tray_padding 0
+
 
  strip_workspace_name no
 
@@ -231,3 +237,7 @@ bar {
 		urgent_workspace	#ed8274	    	#ed8274	    #cfbafa		$purple
 	}
 }
+
+
+# Set wallpaper
+exec --no-startup-id nitrogen --restore
