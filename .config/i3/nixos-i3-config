@@ -220,18 +220,18 @@ bar {
         font pango:Fira Code Mono 9, FontAwesome 9
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	    	position top
-		    tray_output primary
+		    tray_output eDP1
 		    tray_padding 0
 
 
  strip_workspace_name no
 
-		    colors {
-		    separator          #f1fa8c
-		    background         #212733
-		    statusline         $white
+                    colors {
+                    separator          #f1fa8c
+                    background         #212733
+                    statusline         $white
 #                          	border 		        bg		txt		    indicator
-		focused_workspace	#cfbafa         #cfbafa		#212733	    #cfbafa
+                focused_workspace	#cfbafa         #cfbafa		#212733	    #cfbafa
 		active_workspace	#cfbafa      	#212733	    #cfbafa	    $purple
 		inactive_workspace	#212733   		#212733	    #cfbafa		$purple
 		urgent_workspace	#ed8274	    	#ed8274	    #cfbafa		$purple

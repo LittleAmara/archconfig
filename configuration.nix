@@ -15,6 +15,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Setup keyfile
   boot.initrd.secrets = {
     "/crypto_keyfile.bin" = null;
@@ -58,7 +60,7 @@
   # Enable i3 windows manager
   # services.xserver.windowManager.i3.enable = true;
   # services.xserver.windowManager.i3.package = pkgs.i3-gaps;
-  # environment.pathsToLink = [ "/libexec" ];
+  environment.pathsToLink = [ "/libexec" ];
 
   services.xserver = {
     enable = true;
@@ -75,6 +77,12 @@
     windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3.enable = true;
   };
+
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = ''
+    Option "DRI" "2"
+    Option "TearFree" "true"
+  '';
 
   # Configure keymap in X11
   services.xserver = {
@@ -116,6 +124,7 @@
       kitty
       slack
       discord
+      spotify
     ];
   };
 
