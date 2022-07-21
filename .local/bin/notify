@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+set -e
+
+##############################################################################
+## Variables
+
+BLANK=\"\"
+
+# The optional name of the application sending the notification. Can be blank.
+APP_NAME=$BLANK
+
+# The optional program icon of the calling application. See Icons and Images.
+# Can be an empty string, indicating no icon.
+APP_ICON=$BLANK
+
+# The summary text briefly describing the notification.
+TITLE='Example Title'
+
+# The optional detailed body text. Can be empty.
+BODY='This is an example body.'
+
+# Actions are sent over as a list of pairs. Each even element in the list
+# (starting at index 0) represents the identifier for the action. Each odd
+# element in the list is the localized string that will be displayed
+# to the user.
+ACTIONS='[]'
+
+# Optional hints that can be passed to the server from the client program.
+# Although clients and servers should never assume each other supports any
+# specific hints, they can be used to pass along information, such as the
+# process PID or window ID, that the server may be able to make use of.
+#Can be empty.
+HINTS='{}'
+
+#  The timeout time in milliseconds since the display of the notification
+# at which the notification should automatically close.
+# If -1, the notification's expiration time is dependent on the notification
+# server's settings, and may vary for the type of notification.
+# If 0, never expire.
+TIMEOUT=2000
+
+HELP="Usage:
+\nnotify [OPTION…]\n
+\nSend a message to the notification server.\n
+\nApplication Options:\n
+  \t-h, --help      \t\tDisplay a little help message.\n
+  \t-n, --name      \t\tName of the application that sends a message.\n
+  \t-i, --icon      \t\tPath to an icon/image.\n
+  \t-t, --title     \t\tTitle of the message.\n
+  \t-b, --body      \t\tContent of the message.\n
+  \t-T, --timeout   \t\tTimeout in milliseconds."
+
+##############################################################################
+## Arguments parsing
+
+ARGS=$(getopt -o hn:i:t:b:T: \
+    --long help,name:,icon:,title:,debugfile:,body:,timeout: \
+    -n 'notify' -- "$@")
+
+# Quotes around '$ARGS' are essential
+eval set -- "$ARGS"
+
+while true; do
+    case "$1" in
+        -h | --help ) echo -e ${HELP}; exit 0;;
+        -n | --name ) APP_NAME=$2; shift 2;;
+        -i | --icon ) APP_ICON=$2; shift 2;;
+        -t | --title ) TITLE=$2; shift 2;;
+        -b | --body ) BODY=$2; shift 2;;
+        -T | --timeout ) TIMEOUT=$2; shift 2;;
+        -- ) shift; break ;;
+        * ) break ;;
+    esac
+done
+
+##############################################################################
+## Actual notify function
+
+# Sends a notification to the notification server.
+notify() {
+    gdbus call --session \
+        --dest=org.freedesktop.Notifications \
+        --object-path=/org/freedesktop/Notifications \
+        --method=org.freedesktop.Notifications.Notify \
+        $APP_NAME 0 $APP_ICON \
+        "${TITLE}" "${BODY}" \
+        "${ACTIONS}" "${HINTS}" \
+        "${TIMEOUT}"
+}
+
+[ -z "$1" ] || TITLE="$1"
+[ -z "$2" ] || BODY="$2"
+[ -z "$3" ] || APP_ICON="$3"
+
+notify
