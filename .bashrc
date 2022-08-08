@@ -12,8 +12,7 @@ pink="\[\e[1;35m\]"
 green="\[\e[1;32m\]"
 blue="\[\e[1;34m\]"
 cyan="\[\e[1;36m\]"
-red="\[\e[1;36m\]"
-red2="\[\e[1;31m\]"
+red="\[\e[1;31m\]"
 yellow="\[\e[1;33m\]"
 bold="\[\e[1m\]"
 underligne="\[\e[4m\]"
@@ -29,11 +28,38 @@ reset="\[\e[0m\]"
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100
 
 ################################################################################
-## Cosmetics
+## Welcome screen and PS1
 
 [[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
 source ~/.config/.git-prompt.sh
-PS1="$blue"'$(__git_ps1 " (%s)")'"$pink$bold \W > $reset"
+
+# PS1="$blue"'$(__git_ps1 " (%s)")'"$pink$bold \W > ${reset}"
+#STATUS="$?"
+#echo "STATUS $STATUS"
+# [ $STATUS = 0 ] && PS1=${PS1}lolo || PS1=${PS1}"popo"
+
+PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
+
+__prompt_command() {
+    local EXIT="$?"
+    PS1=""
+
+    local Red='\[\e[0;31m\]'
+    local BYel='\[\e[1;33m\]'
+    local BBlu='\[\e[1;34m\]'
+    local Pink='\[\e[0;35m\]'
+    local BPink='\[\e[1;35m\]'
+    local Res='\[\e[0m\]'
+
+    PS1="$blue"'$(__git_ps1 " (%s)")'" ${BPink}\W"
+
+    [[ $EXIT != 0 ]] && PS1+=" ${Red}${EXIT}"
+
+    PS1+=" ${BYel}> ${Res}"
+
+}
+
+
 
 ################################################################################
 ## Some useful aliases
@@ -41,13 +67,13 @@ PS1="$blue"'$(__git_ps1 " (%s)")'"$pink$bold \W > $reset"
 alias todo='vim ~/.todo.md'
 alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o out'
 alias 'fg+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -g -fsanitize=address -o out'
-alias sshgit='ssh-agent > tmp && . ./tmp && rm tmp && ssh-add'
+alias sshgit='ssh-agent > .tmp_ssh_agent && . ./.tmp_ssh_agent && rm .tmp_ssh_agent && ssh-add'
 alias ls='ls --color=auto'
 alias tree='tree -C'
 alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep percentage'
 alias editconf='sudo -e /etc/nixos/configuration.nix'
+alias ff='fzf'
 
 ################################################################################
 ## Use the up and down arrow keys for finding a command in history
@@ -75,10 +101,12 @@ complete -cf sudo
 complete -cf man
 
 ################################################################################
-## Other
+## Variables
 
 export EDITOR="vim"
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
 
+export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
+    --preview='bat --color=always {}'"
 PATH=$PATH:~/.local/bin
