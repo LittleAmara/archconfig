@@ -84,6 +84,8 @@
     Option "TearFree" "true"
   '';
 
+  virtualisation.docker.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -117,7 +119,7 @@
   users.users.amara = {
     isNormalUser = true;
     description = "amara";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
       thunderbird
@@ -149,9 +151,11 @@
     python310Packages.pip
     nitrogen
     i3blocks
+    docker-compose
+    nodejs
+    bat
+    fd
   ];
-
-
 
   fonts.fonts = with pkgs; [
     fira-code
