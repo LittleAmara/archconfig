@@ -40,7 +40,8 @@ __prompt_command() {
 
     [[ $EXIT != 0 ]] && PS1+=" ${Red}${EXIT}"
     [[ -n "$VIRTUAL_ENV" ]] && PS1='(venv)'$PS1
-    [[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
+    #[[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
+    [[ -n "$name" ]] && PS1="${Green}[$name]${Res}"$PS1
 
     PS1+=" ${BYel}> ${Res}"
 
@@ -50,11 +51,12 @@ __prompt_command() {
 ################################################################################
 ## Some useful aliases
 
+alias vim='nvim'
 alias todo='vim ~/.todo.md'
 alias fgcc='gcc -Wall -Wextra -Werror -pedantic -std=c99 -fsanitize=address -g'
 alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o out'
 alias 'fg+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -g -fsanitize=address -o out'
-alias sshgit='ssh-agent > .tmp_ssh_agent && . ./.tmp_ssh_agent && rm .tmp_ssh_agent && ssh-add'
+alias sshgit='eval $(ssh-agent) && ssh-add'
 alias ls='ls --color=auto'
 alias tree='tree -C'
 alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
@@ -63,9 +65,17 @@ alias editconf='sudo -e /etc/nixos/configuration.nix'
 alias ff='fzf'
 alias fr='setxkbmap fr'
 alias us='setxkbmap us'
-alias vimrc='vim ~/.vimrc'
-alias bashrc='vim ~/.bashrc'
-alias i3config='vim ~/.config/i3/config'
+alias vimrc='nvim ~/.vimrc'
+alias bashrc='nvim ~/.bashrc'
+alias i3config='nvim ~/.config/i3/config'
+alias ffcd='__cd_with_fzf'
+
+# alias git
+alias gsw='git switch'
+alias gst='git status'
+alias ga='git add'
+alias gcm='git commit -m'
+alias gpl='git pull'
 
 ################################################################################
 ## Custom bindings
@@ -92,13 +102,13 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 ################################################################################
 ## Autocompletion
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-complete -cf sudo
-complete -cf man
+# complete -cf sudo
+# complete -cf man
 
 ################################################################################
 ## Variables
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
 
@@ -114,21 +124,12 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
 ################################################################################
 ## Functions
 
-cd_with_fzf(){
-    cd $(fd -t d --strip-cwd-prefix| fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" \
-        --preview-window=:hidden) && echo $PWD
-}
+__cd_with_fzf(){
+    #local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | \
+    #    fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)
+    local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | fzf -f "$1" | head -n1)
 
-# $1 the tag
-function PUSH {
-    2>/dev/null make clean || rm -f *.o *.a a.out
-    /home/amara/workspace_epita/piscine-2025-assistants/clang-format.sh
-    tag_msg=$1
-    commit_msg=${tag_msg:10}
-    git add .                                                               &&\
-    git commit -S -m "$commit_msg"                                          &&\
-    git tag -m "$commit_msg" "$tag_msg"                                     &&\
-    git push --follow-tags
+    [[ -z "$PATHNAME" ]] || cd ~/"$PATHNAME"
 }
 
 ################################################################################
