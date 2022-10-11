@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+FILES=$(fzf -f '')
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+RESET='\033[0m'
+
+for file in $FILES
+do
+    if [[ -f "$HOME/$file" ]]
+    then
+        cp "~/${FILE} ${file}"
+        echo -e "${GREEN}Successfully updated $file with $HOME/$file${RESET}"
+    else
+        echo -e "${RED}$file not updated"
+    fi
+done
