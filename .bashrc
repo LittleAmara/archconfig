@@ -41,7 +41,9 @@ __prompt_command() {
     [[ $EXIT != 0 ]] && PS1+=" ${Red}${EXIT}"
     [[ -n "$VIRTUAL_ENV" ]] && PS1='(venv)'$PS1
     #[[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
-    [[ -n "$name" ]] && PS1="${Green}[$name]${Res}"$PS1
+    local nixshell=$(echo $buildInputs | tr ' ' '\n' | sed 's#^/nix/store/[a-z0-9]\+-##' \
+        | tr -d '0-9-.' | tr '\n' ' ' | awk '{$1=$1;print}')
+    [[ -n "$buildInputs" ]] && PS1="${Green}[$nixshell]${Res}"$PS1
 
     PS1+=" ${BYel}> ${Res}"
 
@@ -66,10 +68,11 @@ alias ff='fzf'
 alias fr='setxkbmap fr'
 alias us='setxkbmap us'
 alias vimrc='nvim ~/.vimrc'
+alias nvimrc='nvim ~/.config/nvim/'
 alias bashrc='nvim ~/.bashrc'
 alias i3config='nvim ~/.config/i3/config'
-alias ffcd='__cd_with_fzf'
-
+alias fcd='__cd_with_fzf'
+alias v='__nvim_with_fzf'
 # alias git
 alias gsw='git switch'
 alias gst='git status'
@@ -82,8 +85,8 @@ alias gpl='git pull'
 
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
-bind -x '"\C-o":"vim $(fzf)"'
-bind -x '"\C-f":"cd_with_fzf"'
+bind -x '"\C-o":__nvim_with_fzf'
+bind '"\C-f":"__cd_with_fzf"'
 bind '"\C-H":backward-kill-line'
 # lolo=$(fzf); if [ -z $lolo ]; then echo 'no file has been picked'; else vim $lolo; fi
 
@@ -127,12 +130,22 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
 __cd_with_fzf(){
     #local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | \
     #    fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)
+    [[ -z "$1" ]] && return
     local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | fzf -f "$1" | head -n1)
 
+    [[ -z "$PATHNAME" ]] || echo ~/"$PATHNAME"
     [[ -z "$PATHNAME" ]] || cd ~/"$PATHNAME"
+}
+
+__nvim_with_fzf(){
+    local FILE=$(fzf)
+
+    [[ -z "$FILE" ]] || "$EDITOR" "$FILE"
 }
 
 ################################################################################
 ## Path env
 
 PATH=$PATH:~/.local/bin
+PATH=~/.npm-packages/bin:$PATH
+export NODE_PATH=~/.npm-packages/lib/node_modules

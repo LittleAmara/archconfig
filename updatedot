@@ -10,7 +10,7 @@ for file in $FILES
 do
     if [[ -f "$HOME/$file" ]]
     then
-        cp "${HOME}/$file" "$file"
+        cp "${HOME}/$file" "${REPO_PATH}/$file"
         echo -e "${GREEN}Successfully updated $file with $HOME/$file${RESET}"
     else
         echo -e "${RED}$file not updated"

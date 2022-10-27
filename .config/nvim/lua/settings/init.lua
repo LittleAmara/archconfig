@@ -28,6 +28,7 @@ set.softtabstop = -1
 -- menu
 set.wildmenu = true
 set.wildmode = 'longest,full'
+set.completeopt='menu,menuone,noselect'
 
 -- linebreak
 set.lbr = true
@@ -44,3 +45,13 @@ set.swapfile = false
 
 set.relativenumber = true
 set.number = true
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.nix"},
+  command = "set shiftwidth=2",
+})
+
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = {"*.nix"},
+  command = "silent !nixpkgs-fmt <afile>",
+})
