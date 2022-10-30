@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -74,6 +75,18 @@
       };
     };
     displayManager.defaultSession = "xfce+i3";
+    # displayManager.lightdm.background = "/home/amara/Pictures/wallpapers/lofi_flowers01.jpg";
+    displayManager.lightdm.greeters.mini = {
+      enable = true;
+      user = "amara";
+      extraConfig = ''
+        [greeter]
+        password-label-text = Amara
+        password-alignment = left
+        [greeter-theme]
+        background-image = "/etc/lightdm/wallpaper.jpg"
+      '';
+    };
     windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3.enable = true;
   };
@@ -133,28 +146,44 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Editors
     vim
+    neovim
+
+    # Utils
     wget
-    rofi
     zip
     unzip
     tree
     pstree
-    git
-    scrot
     htop
+    rofi
+    nitrogen
+    i3blocks
+    bat
+    fd
+    nixpkgs-fmt
+    rnix-lsp
+    pyright
+    fzf
+    black
+
+    # Development
+    git
     gcc
     python310
     python310Packages.pip
-    nitrogen
-    i3blocks
     docker-compose
     nodejs
-    bat
-    fd
+    clang-tools
+    poetry
+    pre-commit
   ];
 
   fonts.fonts = with pkgs; [
