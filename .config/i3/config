@@ -223,7 +223,7 @@ bar {
     font pango:Fira Code Mono 9, FontAwesome 9
 
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
-        position bottom
+        position top
         tray_output eDP1
         tray_padding 0
 
@@ -244,5 +244,4 @@ bar {
 
 # Set wallpaper
 exec --no-startup-id nitrogen --restore
-
-for_window [class="sheesh"] floating enable
+for_window [title="toto"] floating enable

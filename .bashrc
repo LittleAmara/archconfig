@@ -49,6 +49,13 @@ __prompt_command() {
 
 }
 
+################################################################################
+## fzf setup on nixos
+
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
 
 ################################################################################
 ## Some useful aliases
@@ -130,10 +137,23 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
 __cd_with_fzf(){
     #local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | \
     #    fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)
-    [[ -z "$1" ]] && return
-    local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | fzf -f "$1" | head -n1)
 
-    [[ -z "$PATHNAME" ]] || echo ~/"$PATHNAME"
+    local BBlu='\e[1;34m'
+    local Res='\e[0m'
+    local PATHNAME
+
+    if [[ -z "$1" ]]
+    then
+        echo "coucou"
+        local dir=$(cd && fd -t d --strip-cwd-prefix | fzf)
+        [[ -z "$dir" ]] && return
+        [[ -d ~/"$dir" ]] || return
+        PATHNAME="$dir"
+    else
+        PATHNAME=$(cd && fd -t d --strip-cwd-prefix | fzf -f "$1" | head -n1)
+    fi
+
+    [[ -z "$PATHNAME" ]] || echo -e " ✨ ${BBlu}~/${PATHNAME}${Res} ✨"
     [[ -z "$PATHNAME" ]] || cd ~/"$PATHNAME"
 }
 
