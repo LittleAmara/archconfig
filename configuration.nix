@@ -175,6 +175,7 @@
     fzf
     black
     picom
+    polybarFull
 
     # Development
     git
