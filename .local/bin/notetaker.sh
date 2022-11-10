@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NOTESPATH="$HOME/notes/note-$(date +%Y-%m-%d).md"
+NOTESPATH="$HOME/notes/general/note-$(date +%Y-%m-%d).md"
 
 if [ ! -f $NOTESPATH ]; then
   echo "# Notes for $(date +%Y-%m-%d)" > $NOTESPATH

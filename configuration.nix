@@ -103,6 +103,7 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+    xkbOptions = "terminate:ctrl_alt_bksp,compose:ralt";
   };
 
   # Enable CUPS to print documents.
@@ -173,6 +174,7 @@
     pyright
     fzf
     black
+    picom
 
     # Development
     git
@@ -184,6 +186,7 @@
     clang-tools
     poetry
     pre-commit
+    gnumake
   ];
 
   fonts.fonts = with pkgs; [

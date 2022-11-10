@@ -55,6 +55,9 @@ floating_modifier $mod
 # Start a terminal
 bindsym $mod+Return exec kitty
 
+# Start a temrinal for notetaking
+bindsym $mod+n exec kitty --title notes .local/bin/notetaker.sh
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -128,6 +131,9 @@ set $ws7 "  7  "
 set $ws8 "  8  "
 set $ws9 "  9  "
 set $ws10 "  10  "
+
+for_window [title="notes"] floating enable, resize set 1100px 800px, move position center;
+for_window [class="Spotify"] move to workspace $ws10, focus;
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -244,4 +250,7 @@ bar {
 
 # Set wallpaper
 exec --no-startup-id nitrogen --restore
-for_window [title="toto"] floating enable
+
+# Enable transparency
+# exec --no-startup-id picom -CGb --experimental-backends
+exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends

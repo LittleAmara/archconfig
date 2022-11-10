@@ -86,6 +86,8 @@ alias gst='git status'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gpl='git pull'
+alias gcd='toto=$(git rev-parse --show-toplevel 2>/dev/null) && \
+    [ -z ${toto} ] || builtin -- cd ${toto}'
 
 ################################################################################
 ## Custom bindings
@@ -163,6 +165,9 @@ __nvim_with_fzf(){
     [[ -z "$FILE" ]] || "$EDITOR" "$FILE"
 }
 
+__cd_to_git_root(){
+    local PATH=$()
+}
 ################################################################################
 ## Path env
 

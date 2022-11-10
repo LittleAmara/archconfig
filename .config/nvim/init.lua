@@ -7,3 +7,4 @@ require('treesitter-config')
 require('telescope-config')
 
 vim.cmd "colorscheme onedark"
+vim.cmd "highlight Normal guibg=none"
