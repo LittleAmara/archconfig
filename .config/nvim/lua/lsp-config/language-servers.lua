@@ -53,3 +53,9 @@ require('lspconfig')['rnix'].setup{
     flags = lsp_flags,
     capabilities = capabilities,
 }
+
+require('lspconfig')['cmake'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}

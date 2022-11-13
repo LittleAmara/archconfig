@@ -252,7 +252,7 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id nitrogen --restore
 
 # Enable transparency
-exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends
 
 # Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

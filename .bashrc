@@ -121,9 +121,6 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 ## Variables
 
 export EDITOR="nvim"
-export PGDATA="$HOME/postgres_data"
-export PGHOST="/tmp"
-
 
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden \
@@ -160,14 +157,19 @@ __cd_with_fzf(){
 }
 
 __nvim_with_fzf(){
-    local FILE=$(fzf)
-
-    [[ -z "$FILE" ]] || "$EDITOR" "$FILE"
+    if [[ "$#" -eq 0 ]]
+    then
+        local FILE=$(fzf)
+        [[ -z "$FILE" ]] || "$EDITOR" "$FILE"
+    else
+        "$EDITOR" "$@"
+    fi
 }
 
 __cd_to_git_root(){
     local PATH=$()
 }
+
 ################################################################################
 ## Path env
 
