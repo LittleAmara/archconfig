@@ -159,8 +159,6 @@
 
     # Utils
     wget
-    zip
-    unzip
     tree
     pstree
     htop
@@ -176,6 +174,7 @@
     black
     picom
     polybarFull
+    cmake-language-server
 
     # Development
     git
@@ -188,6 +187,7 @@
     poetry
     pre-commit
     gnumake
+    cmake
   ];
 
   fonts.fonts = with pkgs; [
@@ -195,6 +195,9 @@
     fira-code-symbols
     font-awesome
   ];
+
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
