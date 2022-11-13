@@ -1,0 +1,26 @@
+[user]
+	email = alexandre.guenot@epita.fr
+	name = Alexandre Guenot
+
+[alias]
+    st = status
+    ca = commit -am
+    cm = commit -m
+    ch = checkout
+    sw = switch
+    pushwl = push --force-with-lease
+    alog = log --oneline --graph --all --decorate
+    tlog = log --oneline --graph --decorate -n 20
+
+[commit]
+    verbose = true
+
+[push]
+    merge = true
+
+[rebase]
+    autoSquash = true
+    autoStash = true
+
+[pull]
+    ff = only
