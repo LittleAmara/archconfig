@@ -1,0 +1,1 @@
+alias toto 'vim sheesh'
