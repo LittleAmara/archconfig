@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, callPackage, ... }:
-
+let
+  unstable = import <nixos-unstable> { };
+in
 {
   imports =
     [
@@ -175,6 +177,7 @@
     picom
     polybarFull
     cmake-language-server
+    fish
 
     # Development
     git
@@ -188,7 +191,8 @@
     pre-commit
     gnumake
     cmake
-  ];
+    binutils
+  ] ++ [ unstable.starship ];
 
   fonts.fonts = with pkgs; [
     fira-code
