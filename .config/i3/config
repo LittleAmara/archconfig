@@ -247,12 +247,11 @@ bindsym $mod+r mode "resize"
 #         }
 # }
 
-
-# Set wallpaper
-exec --no-startup-id nitrogen --restore
-
 # Enable transparency
 # exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends
 
 # Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Set wallpaper
+exec_always --no-startup-id sleep 0.5 && nitrogen --restore

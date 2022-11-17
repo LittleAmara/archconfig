@@ -3,7 +3,8 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {
       "c",
       "python",
-      "nix"
+      "nix",
+      "fish"
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)

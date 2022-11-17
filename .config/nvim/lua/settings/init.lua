@@ -51,17 +51,16 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   command = "set shiftwidth=2",
 })
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"CMakeList.txt"},
-  command = "set filetype=cmake",
-})
-
-
 -- Apply automatically formatter
 
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern = {"*.nix"},
   command = "silent !nixpkgs-fmt <afile>",
+})
+
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = {"*.fish"},
+  command = "silent !fish_indent -w <afile>",
 })
 
 vim.api.nvim_create_autocmd({"BufWritePost"}, {

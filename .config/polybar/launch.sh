@@ -8,9 +8,12 @@ polybar-msg cmd quit
 
 # Launch main bar
 # echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
-polybar main 2>&1 | tee -a /tmp/polybar1.log & disown
+# polybar main 2>&1 | tee -a /tmp/polybar1.log & disown
 # for m in $(polybar --list-monitors | cut -d":" -f1); do
+# for m in $(xrandr | grep ' connected' | cut -d ' ' -f1); do
 #     MONITOR=$m polybar --reload main &
 # done
+
+polybar --reload main &
 
 # echo "Bars launched..."
