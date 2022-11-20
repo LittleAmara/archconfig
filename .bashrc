@@ -14,8 +14,6 @@
 ## Variables
 
 export EDITOR="nvim"
-
-
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden \
     --exclude .git'
 export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
@@ -48,7 +46,7 @@ export NODE_PATH=~/.npm-packages/lib/node_modules
 # The reason this line is here is because we let bash taking care of the set
 # of important env variables if we want to run fish.
 
-export SHELL=$(which fish) && exec fish
+#export SHELL=$(which fish) && exec fish
 
 ################################################################################
 ## Welcome screen and PS1

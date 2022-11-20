@@ -4,7 +4,7 @@
 add_newline = false
 
 format = """
-$directory\
+ $directory\
 $git_branch\
 $git_commit\
 $git_state\
@@ -17,6 +17,7 @@ $c\
 $cmake\
 $python\
 $nix_shell\
+$line_break \
 $cmd_duration\
 $jobs\
 $status\

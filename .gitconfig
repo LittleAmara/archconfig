@@ -25,3 +25,14 @@
 
 [pull]
     ff = only
+    rebase = true
+
+[merge]
+    tool = fugitive
+
+[mergetool "fugitive"]
+    cmd = nvim -f -c '"set nocursorline"' -c '":set wrap"' -c "Gvdiffsplit!" "$MERGED"
+
+[core]
+    editor = nvim
+    autocrlf = input
