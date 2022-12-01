@@ -132,7 +132,7 @@ set $ws8 "  8  "
 set $ws9 "  9  "
 set $ws10 "  10  "
 
-for_window [title="notes"] floating enable, resize set 1100px 800px, move position center;
+for_window [title="^notes$"] floating enable, resize set 1100px 800px, move position center;
 for_window [class="Spotify"] move to workspace $ws10, focus;
 
 # switch to workspace
@@ -248,7 +248,7 @@ bindsym $mod+r mode "resize"
 # }
 
 # Enable transparency
-# exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

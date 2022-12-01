@@ -51,6 +51,11 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   command = "set shiftwidth=2",
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.[hc]"},
+  command = "set comments=s:/*,mb:**,ex:*/,://,:///",
+})
+
 -- Apply automatically formatter
 
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
@@ -67,3 +72,11 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern = {"*.py"},
   command = "silent !black <afile>",
 })
+
+
+-- Auto reload file when nvim resumes from a susoend state
+vim.api.nvim_create_autocmd({ "VimResume" }, {
+    command = "silent checktime",
+    pattern = { "*" },
+})
+

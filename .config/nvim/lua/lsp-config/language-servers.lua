@@ -36,10 +36,19 @@ local lsp_flags = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('lspconfig')['clangd'].setup{
+-- require('lspconfig')['clangd'].setup{
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+-- }
+
+require('lspconfig')['ccls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
+    init_options = {
+    compilationDatabaseDirectory = "build";
+  }
 }
 
 require('lspconfig')['pyright'].setup{

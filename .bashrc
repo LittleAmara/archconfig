@@ -182,3 +182,9 @@ __nvim_with_fzf(){
 __cd_to_git_root(){
     local PATH=$()
 }
+
+
+################################################################################
+## Launch starhsip prompt
+
+eval "$(starship init bash)"

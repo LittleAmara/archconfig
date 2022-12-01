@@ -1,6 +1,4 @@
 # Inserts a blank line between shell prompts
-
-# Inserts a blank line between shell prompts
 add_newline = false
 
 format = """
@@ -16,7 +14,7 @@ $package\
 $c\
 $cmake\
 $python\
-$nix_shell\
+${custom.nix_shell}\
 $line_break \
 $cmd_duration\
 $jobs\
@@ -28,3 +26,10 @@ $character"""
 [character] # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 error_symbol = "[✗](bold red)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+# Custom module that prints the packages installed via nix-shell
+[custom.nix_shell]
+when='[ -n "$buildInputs" ]'
+command="~/.local/bin/nix-shell_buildInput.sh"
+style="bold blue"
+format='via [❄️\($output\)]($style)'

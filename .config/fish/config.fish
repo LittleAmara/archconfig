@@ -7,15 +7,20 @@ if status is-interactive
     # Aliases #
     ###########
     abbr -ga ff fzf
+    abbr -ga l 'ls -1'
     abbr -ga sshgit 'eval $(ssh-agent -c) && ssh-add'
     abbr -ga vim nvim
     abbr -ga nvimrc '$EDITOR ~/.config/nvim'
     abbr -ga gtree 'git ls-tree -r --name-only HEAD | tree --fromfile'
+    abbr -ga us 'setxkbmap us'
+    abbr -ga fr 'setxkbmap fr'
+    abbr -ga editconf 'sudo -e /etc/nixos/configuration.nix'
 
-    ###################
-    # Launch Starship #
-    ###################
+    ##############################
+    # Launch Starship and Zoxide #
+    ##############################
     starship init fish | source
+    zoxide init fish | source
 end
 
 ###################################

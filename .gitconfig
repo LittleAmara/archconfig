@@ -1,17 +1,23 @@
 [user]
-	email = alexandre.guenot@epita.fr
-	name = Alexandre Guenot
+    email = alexandre.guenot@epita.fr
+    name = Alexandre Guenot
 
 [alias]
     st = status
+    sw = switch
+    ch = checkout
+
+    # commit aliases
     ca = commit -am
     cm = commit -m
-    ch = checkout
-    sw = switch
+    toto = commit -v --no-edit --amend
+
+    # push aliases
     pushwl = push --force-with-lease
+
+    # log aliases
     alog = log --oneline --graph --all --decorate
     tlog = log --oneline --graph --decorate -n 20
-    toto = commit -v -s --no-edit --amend
 
 [commit]
     verbose = true
