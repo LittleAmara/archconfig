@@ -157,12 +157,11 @@ in
   environment.systemPackages = with pkgs; [
     # Editors
     vim
-    neovim
 
     # Utils
     wget
     tree
-    pstree
+    psmisc # Provides: fuser, killall, pstree, peekfd
     htop
     rofi
     nitrogen
@@ -178,6 +177,8 @@ in
     polybarFull
     cmake-language-server
     fish
+    zoxide
+    sonixd # Replace spotify
 
     # Development
     git
@@ -187,28 +188,36 @@ in
     docker-compose
     nodejs
     clang-tools
-    poetry
+    ccls
     pre-commit
     gnumake
     cmake
     binutils
-  ] ++ [ unstable.starship ];
+    man-pages
+    man-pages-posix
+
+  ] ++ [
+    unstable.starship
+    unstable.poetry
+    unstable.neovim
+  ];
 
   fonts.fonts = with pkgs; [
-    fira-code
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    # fira-code
     fira-code-symbols
-    font-awesome
+    # font-awesome
   ];
 
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  # system.autoUpgrade.allowReboot = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;
-  #   enableSSHSupport = true;
+  #   pinentryFlavor = "curses";
   # };
 
   # List services that you want to enable:
