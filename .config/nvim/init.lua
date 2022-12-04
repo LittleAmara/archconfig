@@ -1,3 +1,5 @@
+require('impatient')
+
 require('packer-config')
 require('keymaps')
 require('settings')

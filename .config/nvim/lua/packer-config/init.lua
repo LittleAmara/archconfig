@@ -22,6 +22,7 @@ return require('packer').startup(function(use)
   use 'feline-nvim/feline.nvim'
 
   -- Useful plugins
+  use 'lewis6991/impatient.nvim'
   use {
       'nvim-treesitter/nvim-treesitter',
       run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
