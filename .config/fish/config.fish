@@ -28,6 +28,7 @@ end
 ###################################
 
 set -gx EDITOR nvim
+set -gx NIX_OPTIONS '-j auto -L --cores 0'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden \
     --exclude .git'
 set -gx FZF_DEFAULT_OPTS "--layout=reverse --height=75% -m \

@@ -248,7 +248,7 @@ bindsym $mod+r mode "resize"
 # }
 
 # Enable transparency
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
