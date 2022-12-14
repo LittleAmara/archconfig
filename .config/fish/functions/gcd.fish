@@ -6,6 +6,6 @@ function gcd --description "cd into the root of the git repository"
     else
         set_color blue
         echo "✨ Moved into the git root ✨"
-        builtin cd -- "$GITROOT"
+        cd -- "$GITROOT"
     end
 end

@@ -1,15 +1,4 @@
-local keymap = vim.keymap
-
-keymap.set('i', 'jk', '<Esc>')
-
--- Keybinds for moving faster between splits
-keymap.set('n', '<C-l>', '<C-w>l')
-keymap.set('n', '<C-h>', '<C-w>h')
-keymap.set('n', '<C-j>', '<C-w>j')
-keymap.set('n', '<C-k>', '<C-w>k')
-keymap.set('i', '{<CR>',  '<ESC>o{<CR>}<UP><CR>')
-
--- Functional wrapper for mapping custom keybindings
+-- Wrapper for mapping custom keybindings
 function map(mode, lhs, rhs, opts)
     local options = { noremap = true }
     if opts then
@@ -18,9 +7,20 @@ function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- Examples here
+-- Map jk to go back to normal mode
+map('i', 'jk', '<Esc>', {silent = true })
 
--- map("n", ",<Space>", ":nohlsearch<CR>", { silent = true })
--- map("n", "<Leader>", ":<C-u>WhichKey ','<CR>" { silent = true })
--- map("n", "<Leader>?", ":WhichKey ','<CR>")
--- map("n", "<Leader>a", ":cclose<CR>")
+-- Map double escape to remove search highlighting
+map('n', '<leader><leader>', ':noh<CR>', {silent = true })
+
+-- Keybinds for moving faster between splits
+map('n', '<C-l>', '<C-w>l', {silent = true })
+map('n', '<C-h>', '<C-w>h', {silent = true })
+map('n', '<C-j>', '<C-w>j', {silent = true })
+map('n', '<C-k>', '<C-w>k', {silent = true })
+
+-- Pepega braces
+map('i', '{<CR>', '<ESC>o{<CR>}<UP><CR>')
+
+-- Research visually selected text
+map('v', '//',  'y<Esc>/<C-R>+<CR>')

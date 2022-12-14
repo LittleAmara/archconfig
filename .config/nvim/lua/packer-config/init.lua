@@ -28,8 +28,9 @@ return require('packer').startup(function(use)
       run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
   use {
-  'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  requires = { {'nvim-lua/plenary.nvim'} }
-}
+      'nvim-telescope/telescope.nvim', tag = '0.1.0',
+      requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use 'tpope/vim-vinegar'
 
 end)

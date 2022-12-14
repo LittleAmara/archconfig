@@ -10,7 +10,7 @@
     # commit aliases
     ca = commit -am
     cm = commit -m
-    toto = commit -v --no-edit --amend
+    cammend = commit -v --no-edit --amend
 
     # push aliases
     pushwl = push --force-with-lease

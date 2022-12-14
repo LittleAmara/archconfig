@@ -118,7 +118,7 @@ menu=(
   [ Reboot]="xfce4-session-logout --reboot"
   [ Suspend]="sxfce4-session-logout --suspend"
   [ Hibernate]="xfce4-session-logout --hibernate"
-  [ Lock]="xfce4-screensaver-command --lock"
+  [ Lock]="xflock4"
   [ Logout]="xfce4-session-logout --logout"
   [ Cancel]=""
 )

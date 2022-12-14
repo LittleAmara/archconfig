@@ -188,7 +188,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+l exec xfce4-screensaver-command --lock
+bindsym $mod+l exec xflock4
 
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 # bindsym $mod+Shift+e exec xfce4-session-logout
