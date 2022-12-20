@@ -28,6 +28,7 @@ end
 ###################################
 
 set -gx EDITOR nvim
+set -gx BAT_THEME OneHalfDark
 set -gx NIX_OPTIONS '-j auto -L --cores 0'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden \
     --exclude .git'
