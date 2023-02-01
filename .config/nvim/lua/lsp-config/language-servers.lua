@@ -57,13 +57,24 @@ require('lspconfig')['pyright'].setup{
     capabilities = capabilities,
 }
 
-require('lspconfig')['rnix'].setup{
+-- require('lspconfig')['rnix'].setup{
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+-- }
+
+require('lspconfig')['cmake'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
-require('lspconfig')['cmake'].setup{
+require('lspconfig')['nil_ls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,

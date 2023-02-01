@@ -14,7 +14,8 @@ if status is-interactive
     abbr -ga gtree 'git ls-tree -r --name-only HEAD | tree --fromfile'
     abbr -ga us 'setxkbmap us'
     abbr -ga fr 'setxkbmap fr'
-    abbr -ga editconf 'sudo -e /etc/nixos/configuration.nix'
+    abbr -ga nixconf 'sudo -e /etc/nixos/configuration.nix'
+    abbr -ga mag 'z tool'
 
     ##############################
     # Launch Starship and Zoxide #
@@ -29,6 +30,7 @@ end
 
 set -gx EDITOR nvim
 set -gx BAT_THEME OneHalfDark
+set -gx CLICOLOR 1 #enable color for tree
 set -gx NIX_OPTIONS '-j auto -L --cores 0'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden \
     --exclude .git'

@@ -5,7 +5,7 @@ local U = require "catppuccin.utils.colors"
 
 ctp_feline.setup({
     assets = {
-        left_separator = "",
+        left_separator = "",
         right_separator = "",
         bar = "█",
         mode_icon = "⮞ ",

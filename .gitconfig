@@ -41,3 +41,6 @@
 [core]
     editor = nvim
     autocrlf = input
+
+[mergetool]
+    keepBackup = false

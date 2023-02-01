@@ -20,7 +20,8 @@ map('n', '<C-j>', '<C-w>j', {silent = true })
 map('n', '<C-k>', '<C-w>k', {silent = true })
 
 -- Pepega braces
-map('i', '{<CR>', '<ESC>o{<CR>}<UP><CR>')
+-- map('i', '{<CR>', '<ESC>o{<CR>}<UP><CR>')
+map('i', '{<CR>', '{<CR>}<UP><END><CR>')
 
 -- Research visually selected text
 map('v', '//',  'y<Esc>/<C-R>+<CR>')

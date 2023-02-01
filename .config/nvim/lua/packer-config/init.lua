@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
   use { "nvim-tree/nvim-web-devicons" }
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'feline-nvim/feline.nvim'
+  use 'kvrohit/rasmus.nvim'
 
   -- Useful plugins
   use 'lewis6991/impatient.nvim'

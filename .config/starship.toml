@@ -14,7 +14,7 @@ $package\
 $c\
 $cmake\
 $python\
-${custom.nix_shell}\
+$nix_shell\
 $line_break \
 $cmd_duration\
 $jobs\
@@ -22,10 +22,15 @@ $status\
 $container\
 $character"""
 
+# ${custom.nix_shell}\
+
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
 success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 error_symbol = "[✗](bold red)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[nix_shell]
+symbol='❄️ '
 
 # Custom module that prints the packages installed via nix-shell
 [custom.nix_shell]

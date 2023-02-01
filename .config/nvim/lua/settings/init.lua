@@ -46,6 +46,11 @@ set.swapfile = false
 set.relativenumber = true
 set.number = true
 
+-- Set a global statusline, previous one was 2
+set.laststatus = 3
+
+vim.api.nvim_create_user_command("Cformat", "%!clang-format --style=file %:p", {})
+
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.nix"},
   command = "set shiftwidth=2",
