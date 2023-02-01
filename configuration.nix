@@ -35,6 +35,11 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
+  services.blueman.enable = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
@@ -73,31 +78,38 @@ in
       xfce = {
         enable = true;
         noDesktop = true;
+        enableScreensaver = false;
         enableXfwm = false;
       };
     };
     displayManager.defaultSession = "xfce+i3";
     # displayManager.lightdm.background = "/home/amara/Pictures/wallpapers/lofi_flowers01.jpg";
-    displayManager.lightdm.greeters.mini = {
+    #displayManager.lightdm.greeters.mini = {
+    #  enable = true;
+    #  user = "amara";
+    #  extraConfig = ''
+    #    [greeter]
+    #    password-label-text = Amara
+    #    password-alignment = left
+    #    [greeter-theme]
+    #    background-image = "/etc/lightdm/wallpaper.jpg"
+    #  '';
+    #};
+    displayManager.autoLogin = {
       enable = true;
       user = "amara";
-      extraConfig = ''
-        [greeter]
-        password-label-text = Amara
-        password-alignment = left
-        [greeter-theme]
-        background-image = "/etc/lightdm/wallpaper.jpg"
-      '';
     };
     windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3.enable = true;
   };
 
-  services.xserver.videoDrivers = [ "intel" ];
-  services.xserver.deviceSection = ''
-    Option "DRI" "2"
-    Option "TearFree" "true"
-  '';
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
+  #   services.xserver.deviceSection = ''
+  #     Option "DRI" "2"
+  #     Option "TearFree" "true"
+  #   '';
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   virtualisation.docker.enable = true;
 
@@ -152,8 +164,7 @@ in
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Packages
   environment.systemPackages = with pkgs; [
     # Editors
     vim
@@ -162,14 +173,14 @@ in
     wget
     tree
     psmisc # Provides: fuser, killall, pstree, peekfd
-    htop
     rofi
     nitrogen
     i3blocks
     bat
     fd
     nixpkgs-fmt
-    rnix-lsp
+    rnix-lsp #nix lsp
+    nil #nix lsp
     pyright
     fzf
     black
@@ -179,6 +190,8 @@ in
     fish
     zoxide
     sonixd # Replace spotify
+    ripgrep # Mandatory if i want to use live_grep of telescope (nvim)
+    betterlockscreen
 
     # Development
     git
@@ -195,17 +208,21 @@ in
     binutils
     man-pages
     man-pages-posix
+    gdb
+    go
 
   ] ++ [
     unstable.starship
     unstable.poetry
     unstable.neovim
+    unstable.gopls
   ];
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     # fira-code
     fira-code-symbols
+    iosevka-comfy.comfy-wide
     # font-awesome
   ];
 
