@@ -58,6 +58,10 @@ in
     LC_TIME = "fr_FR.utf8";
   };
 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "amara" ];
+
+
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
@@ -192,6 +196,7 @@ in
     sonixd # Replace spotify
     ripgrep # Mandatory if i want to use live_grep of telescope (nvim)
     betterlockscreen
+    jq
 
     # Development
     git
@@ -210,6 +215,9 @@ in
     man-pages-posix
     gdb
     go
+    jetbrains.idea-ultimate
+    maven
+    jdk17
 
   ] ++ [
     unstable.starship

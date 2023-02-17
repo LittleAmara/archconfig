@@ -15,7 +15,7 @@ if status is-interactive
     abbr -ga us 'setxkbmap us'
     abbr -ga fr 'setxkbmap fr'
     abbr -ga nixconf 'sudo -e /etc/nixos/configuration.nix'
-    abbr -ga mag 'z tool'
+    abbr -ga mag 'bluetoothctl power'
 
     ##############################
     # Launch Starship and Zoxide #
