@@ -6,7 +6,10 @@ require'nvim-treesitter.configs'.setup {
       "nix",
       "fish",
       "cmake",
-      "go"
+      "go",
+      "cpp",
+      "hcl",
+      "terraform"
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)

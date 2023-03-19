@@ -47,7 +47,10 @@ require('lspconfig')['ccls'].setup{
     flags = lsp_flags,
     capabilities = capabilities,
     init_options = {
-    compilationDatabaseDirectory = "build";
+    compilationDatabaseDirectory = "build",
+    cache = {
+        directory = '/home/amara/.ccls-cache'
+    }
   }
 }
 

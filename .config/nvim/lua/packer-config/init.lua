@@ -9,6 +9,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
+  -- use {'neoclide/coc.nvim', branch = 'release'}
 
   -- Git plugins
   use 'tpope/vim-fugitive'
@@ -21,6 +22,9 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'feline-nvim/feline.nvim'
   use 'kvrohit/rasmus.nvim'
+  use 'EdenEast/nightfox.nvim'
+  use 'marko-cerovac/material.nvim'
+  use 'rose-pine/neovim'
 
   -- Useful plugins
   use 'lewis6991/impatient.nvim'
@@ -33,5 +37,8 @@ return require('packer').startup(function(use)
       requires = { {'nvim-lua/plenary.nvim'} }
   }
   use 'tpope/vim-vinegar'
+
+  -- Notifications plugin
+  use 'rcarriga/nvim-notify'
 
 end)
