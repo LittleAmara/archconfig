@@ -49,7 +49,9 @@ set.number = true
 -- Set a global statusline, previous one was 2
 set.laststatus = 3
 
-vim.api.nvim_create_user_command("Cformat", "%!clang-format --style=file %:p", {})
+vim.api.nvim_create_user_command("FormatC", "%!clang-format --style=file %:p", {})
+vim.api.nvim_create_user_command("FormatNix", "!nixpkgs-fmt %", {})
+vim.api.nvim_create_user_command("FormatPython", "!black -l 120 %", {})
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.nix"},
@@ -63,10 +65,10 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 
 -- Apply automatically formatter
 
-vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = {"*.nix"},
-  command = "silent !nixpkgs-fmt <afile>",
-})
+-- vim.api.nvim_create_autocmd({"BufWritePost"}, {
+--   pattern = {"*.nix"},
+--   command = "silent !nixpkgs-fmt <afile>",
+-- })
 
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern = {"*.fish"},
@@ -79,7 +81,7 @@ vim.api.nvim_create_autocmd({"BufWritePost"}, {
 })
 
 
--- Auto reload file when nvim resumes from a susoend state
+-- Auto reload file when nvim resumes from a suspend state
 vim.api.nvim_create_autocmd({ "VimResume" }, {
     command = "silent checktime",
     pattern = { "*" },

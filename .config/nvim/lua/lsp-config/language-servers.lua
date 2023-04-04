@@ -36,35 +36,45 @@ local lsp_flags = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- require('lspconfig')['clangd'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
---     capabilities = capabilities,
--- }
-
-require('lspconfig')['ccls'].setup{
+require('lspconfig')['clangd'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
-    init_options = {
-    compilationDatabaseDirectory = "build",
-    cache = {
-        directory = '/home/amara/.ccls-cache'
-    }
-  }
+}
+
+-- require('lspconfig')['ccls'].setup{
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+--     init_options = {
+--     compilationDatabaseDirectory = "build",
+--     cache = {
+--         directory = '/home/amara/.ccls-cache'
+--     }
+--   }
+-- }
+
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
 
 require('lspconfig')['pyright'].setup{
+    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
-
--- require('lspconfig')['rnix'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
---     capabilities = capabilities,
--- }
 
 require('lspconfig')['cmake'].setup{
     on_attach = on_attach,
@@ -77,6 +87,7 @@ require('lspconfig')['nil_ls'].setup{
     flags = lsp_flags,
     capabilities = capabilities,
 }
+
 require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,

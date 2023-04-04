@@ -11,6 +11,7 @@ require("telescope").setup {
   },
   pickers = {
     find_files = {
+        -- theme = "ivy",
       find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git"}
     },
   }
