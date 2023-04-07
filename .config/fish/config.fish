@@ -31,7 +31,7 @@ end
 ###################################
 
 set -gx EDITOR nvim
-set -gx BAT_THEME OneHalfDark
+set -gx BAT_THEME Catppuccin-frappe
 set -gx CLICOLOR 1 #enable color for tree
 set -gx NIX_OPTIONS '-j auto -L --cores 0'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden \
@@ -48,6 +48,8 @@ set -gx LESS_TERMCAP_se (printf "\033[0m")
 set -gx LESS_TERMCAP_so (printf "\033[01;33m")
 set -gx LESS_TERMCAP_ue (printf "\033[0m")
 set -gx LESS_TERMCAP_us (printf "\033[01;4;31m")
+
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 set -gx NODE_PATH ~/.npm-packages/lib/node_modules
 

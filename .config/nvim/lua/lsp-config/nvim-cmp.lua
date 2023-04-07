@@ -12,7 +12,6 @@ local border = {
     { "│", "CmpBorder" },
 }
 
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {

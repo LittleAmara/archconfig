@@ -36,24 +36,7 @@ local lsp_flags = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('lspconfig')['clangd'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-}
-
--- require('lspconfig')['ccls'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
---     capabilities = capabilities,
---     init_options = {
---     compilationDatabaseDirectory = "build",
---     cache = {
---         directory = '/home/amara/.ccls-cache'
---     }
---   }
--- }
-
+-- Borders that will be used for the floating windows of cmp
 local border = {
     { "╭", "FloatBorder" },
     { "─", "FloatBorder" },
@@ -64,10 +47,32 @@ local border = {
     { "╰", "FloatBorder" },
     { "│", "FloatBorder" },
 }
+
 local handlers =  {
   ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
+
+-- Setup for each lsp
+require('lspconfig')['clangd'].setup{
+    handlers=handlers,
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+
+-- require('lspconfig')['ccls'].setup{
+--     on_attach = on_attach,
+--     handlers=handlers,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+--     init_options = {
+--     compilationDatabaseDirectory = "build",
+--     cache = {
+--         directory = '/home/amara/.ccls-cache'
+--     }
+--   }
+-- }
 
 require('lspconfig')['pyright'].setup{
     handlers=handlers,
@@ -77,18 +82,21 @@ require('lspconfig')['pyright'].setup{
 }
 
 require('lspconfig')['cmake'].setup{
+    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
 require('lspconfig')['nil_ls'].setup{
+    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
 require('lspconfig')['gopls'].setup{
+    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,

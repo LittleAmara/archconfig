@@ -50,8 +50,8 @@ set.number = true
 set.laststatus = 3
 
 vim.api.nvim_create_user_command("FormatC", "%!clang-format --style=file %:p", {})
-vim.api.nvim_create_user_command("FormatNix", "!nixpkgs-fmt %", {})
-vim.api.nvim_create_user_command("FormatPython", "!black -l 120 %", {})
+vim.api.nvim_create_user_command("FormatNix", "silent !nixpkgs-fmt %", {})
+vim.api.nvim_create_user_command("FormatPython", "silent !black -l 120 %", {})
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = {"*.nix"},
