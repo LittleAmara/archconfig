@@ -1,6 +1,6 @@
 [user]
     email = alexandre.guenot@epita.fr
-    name = Alexandre Guenot
+    name  = Alexandre Guenot
 
 [alias]
     st = status
@@ -8,8 +8,8 @@
     ch = checkout
 
     # commit aliases
-    ca = commit -am
-    cm = commit -m
+    ca      = commit -am
+    cm      = commit -m
     cammend = commit -v --no-edit --amend
 
     # push aliases
@@ -18,6 +18,7 @@
     # log aliases
     alog = log --oneline --graph --all --decorate
     tlog = log --oneline --graph --decorate -n 20
+    dlog = log --pretty=format:\"%C(yellow)%h%C(reset) %C(black)•%C(reset) %<(50)%s %C(green)(%cr) [%an] %C(auto)%d%C(reset)\" --abbrev-commit -30
 
 [commit]
     verbose = true
@@ -27,7 +28,7 @@
 
 [rebase]
     autoSquash = true
-    autoStash = true
+    autoStash  = true
 
 [pull]
     ff = only
@@ -39,7 +40,7 @@
     cmd = nvim -f -c '"set nocursorline"' -c '":set wrap"' -c "Gvdiffsplit!" "$MERGED"
 
 [core]
-    editor = nvim
+    editor   = nvim
     autocrlf = input
 
 [mergetool]
