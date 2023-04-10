@@ -1,6 +1,5 @@
 #/usr/bin/env bash
 
-set -e
 
 REPO_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 CONFIGS="$(ls -d ${REPO_PATH}/*)"
@@ -28,15 +27,17 @@ good() {
 }
 
 make_backup() {
+    set -e
+
     [[ "$#" -eq 0 ]] && fatal "You need to specify an absolute path to a directory/file you want to backup"
 
     local TARGET="$1"
 
-    [[ -L "$TARGET" ]] && info "$1 is a already a symlink, skipping it\n" && return 1
+    [[ -L "$TARGET" ]] && info "$1 is a already a symlink, skipping it\n" && exit 1
     [ \( -f "$TARGET" \) -o \( -d "$TARGET" \) ] \
         && mv --backup=numbered "$TARGET" "$BACKUP_DIR" \
         && info "$TARGET is backed up in $BACKUP_DIR" \
-        || info "$1 doesn't exists, skipping backup" && return 0
+        || info "$1 doesn't exists, skipping backup" && exit 0
 }
 
 install_config() {
@@ -50,8 +51,8 @@ install_config() {
     local TARGET="$1"
     local DST="${HOME}/.config/$FILENAME"
 
-    make_backup "$DST"
-    [[ "$?" -eq "1" ]] && echo && exit 0
+    (make_backup "$DST")
+    [[ "$?" -eq "1" ]] && echo && return 0
 
     ln -sivb --no-target-directory "$TARGET" "$DST"
     good "Configuration is installed in $DST!"
