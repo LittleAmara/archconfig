@@ -3,9 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, callPackage, ... }:
-let
-  unstable = import <nixos-unstable> { };
-in
 {
   imports =
     [
@@ -18,7 +15,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -58,7 +55,7 @@ in
     LC_TIME = "fr_FR.utf8";
   };
 
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "amara" ];
 
 
@@ -107,11 +104,11 @@ in
     windowManager.i3.enable = true;
   };
 
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
-  #   services.xserver.deviceSection = ''
+  services.xserver.videoDrivers = [ "modesetting" ];
   #     Option "DRI" "2"
-  #     Option "TearFree" "true"
-  #   '';
+  services.xserver.deviceSection = ''
+    Option "TearFree" "true"
+  '';
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
@@ -169,62 +166,63 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Packages
-  environment.systemPackages = with pkgs; [
-    # Editors
-    vim
+  environment.systemPackages = with pkgs;
+    [
+      # Editors
+      vim
 
-    # Utils
-    wget
-    tree
-    psmisc # Provides: fuser, killall, pstree, peekfd
-    rofi
-    nitrogen
-    i3blocks
-    bat
-    fd
-    nixpkgs-fmt
-    rnix-lsp #nix lsp
-    nil #nix lsp
-    pyright
-    fzf
-    black
-    picom
-    polybarFull
-    cmake-language-server
-    fish
-    zoxide
-    sonixd # Replace spotify
-    ripgrep # Mandatory if i want to use live_grep of telescope (nvim)
-    betterlockscreen
-    jq
+      # Utils
+      wget
+      tree
+      psmisc # Provides: fuser, killall, pstree, peekfd
+      rofi
+      nitrogen
+      i3blocks
+      bat
+      fd
+      nixpkgs-fmt
+      rnix-lsp #nix lsp
+      nil #nix lsp
+      pyright
+      fzf
+      black
+      picom
+      polybarFull
+      cmake-language-server
+      fish
+      zoxide
+      sonixd # Replace spotify
+      ripgrep # Mandatory if i want to use live_grep of telescope (nvim)
+      betterlockscreen
+      jq
+      catppuccin-gtk
 
-    # Development
-    git
-    gcc
-    python310
-    python310Packages.pip
-    docker-compose
-    nodejs
-    clang-tools
-    ccls
-    pre-commit
-    gnumake
-    cmake
-    binutils
-    man-pages
-    man-pages-posix
-    gdb
-    go
-    jetbrains.idea-ultimate
-    maven
-    jdk17
-
-  ] ++ [
-    unstable.starship
-    unstable.poetry
-    unstable.neovim
-    unstable.gopls
-  ];
+      # Development
+      git
+      gcc
+      python310
+      python310Packages.pip
+      docker-compose
+      nodejs
+      clang-tools
+      ccls
+      pre-commit
+      gnumake
+      cmake
+      binutils
+      man-pages
+      man-pages-posix
+      gdb
+      go
+      jetbrains.idea-ultimate
+      maven
+      jdk17
+      tree-sitter
+      starship
+      poetry
+      neovim
+      gopls
+    ];
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
@@ -234,7 +232,7 @@ in
     # font-awesome
   ];
 
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
   # system.autoUpgrade.allowReboot = true;
 
   # Some programs need SUID wrappers, can be configured further or are
