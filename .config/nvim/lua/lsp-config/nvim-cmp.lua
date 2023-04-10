@@ -73,11 +73,10 @@ cmp.setup {
     window = {
         completion = { -- rounded border; thin-style scrollbar
             border = border,
-            scrollbar = '║',
+            winhighlight = 'FloatBorder:None',
         },
         documentation = { -- rounded border; thin-style scrollbar
             border = border,
-            scrollbar = '║',
         },
     }
 }
