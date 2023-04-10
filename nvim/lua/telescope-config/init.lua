@@ -7,12 +7,20 @@ vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
 
 require("telescope").setup {
   defaults = {
-    -- ....
+      layout_config = {
+          horizontal = {
+              prompt_position = "top",
+          },
+      },
+      file_ignore_patterns = { "node_modules" },
   },
   pickers = {
-    find_files = {
-        -- theme = "ivy",
-      find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git"}
-    },
+      find_files = {
+          theme = "ivy",
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git"}
+      },
+      git_files = {
+          theme = "ivy",
+      },
   }
 }
