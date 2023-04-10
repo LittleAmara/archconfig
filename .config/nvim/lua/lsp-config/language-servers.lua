@@ -48,14 +48,10 @@ local border = {
     { "│", "FloatBorder" },
 }
 
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
-}
+require('lspconfig.ui.windows').default_options.border = border
 
 -- Setup for each lsp
 require('lspconfig')['clangd'].setup{
-    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
@@ -63,7 +59,6 @@ require('lspconfig')['clangd'].setup{
 
 -- require('lspconfig')['ccls'].setup{
 --     on_attach = on_attach,
---     handlers=handlers,
 --     flags = lsp_flags,
 --     capabilities = capabilities,
 --     init_options = {
@@ -75,28 +70,24 @@ require('lspconfig')['clangd'].setup{
 -- }
 
 require('lspconfig')['pyright'].setup{
-    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
 require('lspconfig')['cmake'].setup{
-    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
 require('lspconfig')['nil_ls'].setup{
-    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
 
 require('lspconfig')['gopls'].setup{
-    handlers=handlers,
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
