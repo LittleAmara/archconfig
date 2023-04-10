@@ -10,6 +10,26 @@
 [[ "$(whoami)" = "root" ]] && return
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100
 
+
+################################################################################
+## Setup the ssh-agent
+
+export SSH_ENV="${HOME}/.ssh/environment"
+
+if [ \( -f "$SSH_ENV" \) -a \( -z "$SSH_AGENT_PID" \) ]
+then
+    source $SSH_ENV > /dev/null
+else
+    ssh-add -l > /dev/null 2>&1
+    if [ \( \( -z "$SSH_AGENT_PID" \) -a \( -z "$SSH_CONNECTION" \) \) -o \( "$?" != "0" \) ]
+    then
+        ssh-agent | sed 's/^echo/#echo/' > $SSH_ENV
+        chmod 600 $SSH_ENV
+        source $SSH_ENV > /dev/null
+    fi
+fi
+
+
 ################################################################################
 ## Variables
 
@@ -20,6 +40,10 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
     --bind="space:toggle-preview" \
     --preview='bat --color=always {}' \
     --preview-window=:hidden"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="Catppuccin-frappe"
+export CLICOLOR=1 #enable color for tree
+export NIX_OPTIONS="-j auto -L --cores 0"
 
 ################################################################################
 ## LESS configuration to get color in manuals
@@ -123,8 +147,9 @@ alias gst='git status'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gpl='git pull'
-alias gcd='toto=$(git rev-parse --show-toplevel 2>/dev/null) && \
-    [ -z ${toto} ] || builtin -- cd ${toto}'
+#alias gcd='toto=$(git rev-parse --show-toplevel 2>/dev/null) && \
+#    [ -z ${toto} ] || builtin -- cd ${toto}'
+alias gcd='__cd_to_git_root'
 
 ################################################################################
 ## Custom bindings
@@ -156,7 +181,6 @@ __cd_with_fzf(){
 
     if [[ -z "$1" ]]
     then
-        echo "coucou"
         local dir=$(cd && fd -t d --strip-cwd-prefix | fzf)
         [[ -z "$dir" ]] && return
         [[ -d ~/"$dir" ]] || return
@@ -180,11 +204,19 @@ __nvim_with_fzf(){
 }
 
 __cd_to_git_root(){
-    local PATH=$()
+    local Red='\e[0;31m'
+    local BBlu='\e[1;34m'
+    local Res='\e[0m'
+
+    local GITROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+    [[ -n "$GITROOT" ]] && builtin -- cd "$GITROOT" && echo -e " ✨ ${BBlu}Now at the git root${Res} ✨" || echo -e ${Red}"✗ Not in a git repository ✗ ${Res}"
+
+
 }
 
 
 ################################################################################
-## Launch starhsip prompt
+## Launch zoxide and starship prompt
 
+eval "$(zoxide init bash)"
 eval "$(starship init bash)"
