@@ -14,18 +14,18 @@
 ################################################################################
 ## Setup the ssh-agent
 
-export SSH_ENV="${HOME}/.ssh/environment"
+export SSH_ENV_BASH="${HOME}/.ssh/environment_bash"
 
-if [ \( -f "$SSH_ENV" \) -a \( -z "$SSH_AGENT_PID" \) ]
+if [ \( -f "$SSH_ENV_BASH" \) -a \( -z "$SSH_AGENT_PID" \) ]
 then
-    source $SSH_ENV > /dev/null
+    source $SSH_ENV_BASH > /dev/null
 else
     ssh-add -l > /dev/null 2>&1
     if [ \( \( -z "$SSH_AGENT_PID" \) -a \( -z "$SSH_CONNECTION" \) \) -o \( "$?" != "0" \) ]
     then
-        ssh-agent | sed 's/^echo/#echo/' > $SSH_ENV
-        chmod 600 $SSH_ENV
-        source $SSH_ENV > /dev/null
+        ssh-agent | sed 's/^echo/#echo/' > $SSH_ENV_BASH
+        chmod 600 $SSH_ENV_BASH
+        source $SSH_ENV_BASH > /dev/null
     fi
 fi
 
@@ -37,7 +37,7 @@ export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden \
     --exclude .git'
 export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
-    --bind="space:toggle-preview" \
+    --bind="ctrl-space:toggle-preview" \
     --preview='bat --color=always {}' \
     --preview-window=:hidden"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
