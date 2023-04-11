@@ -54,11 +54,17 @@ floating_modifier $mod
 # start a terminal with default block cursor
 # bindsym $mod+Return exec kitty -o 'shell_integration no-cursor'
 
+# Start a terminal in fullscreen
+bindsym $mod+Shift+Return exec kitty --title kitty_full
+
 # Start a terminal
 bindsym $mod+Return exec kitty
 
 # Start a temrinal for notetaking
 bindsym $mod+n exec kitty --title notes .local/bin/notetaker.sh
+
+# Toggle polyabars
+bindsym $mod+z exec polybar-msg cmd toggle
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -141,6 +147,7 @@ set $ws8 "  8  "
 set $ws9 "  9  "
 set $ws10 "  10  "
 
+for_window [title="^kitty_full$"] fullscreen enable;
 for_window [title="^notes$"] floating enable, resize set 1100px 800px, move position center;
 for_window [class="Spotify"] move to workspace $ws10, focus;
 
