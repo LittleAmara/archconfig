@@ -17,7 +17,7 @@ if status is-interactive
     abbr -ga nixconf 'sudo -e /etc/nixos/configuration.nix'
     abbr -ga mag 'bluetoothctl power'
     abbr -ga g git
-    abbr -ga nix-shell 'nix-shell --command fish'
+    abbr -ga gvim 'nvim -c ":cd $(git rev-parse --show-toplevel)"'
 
     ##############################
     # Launch Starship and Zoxide #
