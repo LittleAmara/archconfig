@@ -171,7 +171,7 @@ def draw_tab(
     extra_data: ExtraData,
 ) -> int:
     add_timer(_redraw_tab_bar, REFRESH_TIME, True)
-    _draw_icon(draw_data, screen, index)
+    # _draw_icon(draw_data, screen, index)
     _draw_left_status(
         draw_data,
         screen,
