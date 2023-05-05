@@ -2,6 +2,7 @@ return {
     {
         'tpope/vim-fugitive',
         event = { 'VeryLazy' },
+        ft = "gitcommit"
     },
     {
         'lewis6991/gitsigns.nvim',
