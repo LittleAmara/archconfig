@@ -19,7 +19,7 @@ return
         defaults = {
             layout_config = {
                 horizontal = {
-                    prompt_position = "top",
+                    prompt_position = "bottom",
                 },
             },
             file_ignore_patterns = { "node_modules" },
