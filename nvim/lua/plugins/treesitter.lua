@@ -15,7 +15,8 @@ return
             "hcl",
             "nix",
             "python",
-            "terraform"
+            "terraform",
+            "javascript"
         },
         sync_install = false,
         highlight = {

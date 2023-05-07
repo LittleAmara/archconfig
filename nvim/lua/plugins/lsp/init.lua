@@ -32,6 +32,7 @@ return
         servers = {
             cmake = {},
             gopls = {},
+            tsserver = {},
             clangd = {
                 settings = {
                     ['clangd'] = {
