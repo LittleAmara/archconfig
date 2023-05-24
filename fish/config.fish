@@ -49,6 +49,9 @@ set -gx LESS_TERMCAP_so (printf "\033[01;33m")
 set -gx LESS_TERMCAP_ue (printf "\033[0m")
 set -gx LESS_TERMCAP_us (printf "\033[01;4;31m")
 
+set -gx PGDATA "$HOME/postgres_data"
+set -gx PGHOST /tmp
+
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 set -gx NODE_PATH ~/.npm-packages/lib/node_modules
