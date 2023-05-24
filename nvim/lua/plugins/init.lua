@@ -1,5 +1,13 @@
 return {
     {'folke/lazy.nvim'},
-    -- {'nvim-tree/nvim-web-devicons', lazy = true},
-    {'tpope/vim-vinegar'},
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        lazy = false,
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        keys = {
+            {'-', '<cmd>Oil<cr>', desc = "Open parent directory"},
+            {'<leader>-', '<cmd>Oil --float<cr>', desc = "Open parent directory in a floating window"},
+        },
+    }
 }
