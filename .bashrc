@@ -44,6 +44,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Catppuccin-frappe"
 export CLICOLOR=1 #enable color for tree
 export NIX_OPTIONS="-j auto -L --cores 0"
+export PYTHONSTARTUP=~/.pyrc
 
 ################################################################################
 ## LESS configuration to get color in manuals
@@ -73,17 +74,9 @@ export NODE_PATH=~/.npm-packages/lib/node_modules
 #export SHELL=$(which fish) && exec fish
 
 ################################################################################
-## Welcome screen and PS1
+## Setup of the function that will be used for generating the PS1
 
-[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
 source ~/.config/.git-prompt.sh
-
-# PS1="$blue"'$(__git_ps1 " (%s)")'"$pink$bold \W > ${reset}"
-#STATUS="$?"
-#echo "STATUS $STATUS"
-# [ $STATUS = 0 ] && PS1=${PS1}lolo || PS1=${PS1}"popo"
-
-PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
 
 __prompt_command() {
     local EXIT="$?"
@@ -98,17 +91,17 @@ __prompt_command() {
     local BPink='\[\e[1;35m\]'
     local Res='\[\e[0m\]'
 
-    PS1="$blue"'$(__git_ps1 " (%s)")'" ${BPink}\W"
-
-    [[ $EXIT != 0 ]] && PS1+=" ${Red}${EXIT}"
-    [[ -n "$VIRTUAL_ENV" ]] && PS1='(venv)'$PS1
+    PS1=" ${BPink}\w ""$blue"'$(__git_ps1 "on  %s")'
+    [[ -n "$VIRTUAL_ENV" ]] && PS1=${PS1}"${Res} via ${BYel}(venv)"
+    PS1=${PS1}"\n"
     #[[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
-    local nixshell=$(echo $buildInputs | tr ' ' '\n' | sed 's#^/nix/store/[a-z0-9]\+-##' \
-        | tr -d '0-9-.' | tr '\n' ' ' | awk '{$1=$1;print}')
-    [[ -n "$buildInputs" ]] && PS1="${Green}[$nixshell]${Res}"$PS1
+    #local nixshell=$(echo $buildInputs | tr ' ' '\n' | sed 's#^/nix/store/[a-z0-9]\+-##' \
+    #    | tr -d '0-9-.' | tr '\n' ' ' | awk '{$1=$1;print}')
+    #[[ -n "$buildInputs" ]] && PS1="${Green}[$nixshell]${Res}"$PS1
 
-    PS1+=" ${BYel}> ${Res}"
-
+    local nb_jobs=$(jobs | wc -l)
+    [[ "$nb_jobs" != 0 ]] && PS1+=" ${BBlu}✦$([ "$nb_jobs" != 1 ] && echo $nb_jobs)"
+    [[ $EXIT != 0 ]] && PS1+=" ${Red}> ${Res}" || PS1+=" ${Green}> ${Res}"
 }
 
 ################################################################################
@@ -147,8 +140,6 @@ alias gst='git status'
 alias ga='git add'
 alias gcm='git commit -m'
 alias gpl='git pull'
-#alias gcd='toto=$(git rev-parse --show-toplevel 2>/dev/null) && \
-#    [ -z ${toto} ] || builtin -- cd ${toto}'
 alias gcd='__cd_to_git_root'
 
 ################################################################################
@@ -216,7 +207,9 @@ __cd_to_git_root(){
 
 
 ################################################################################
-## Launch zoxide and starship prompt
+## Launch zoxide and prompt
 
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
+
+#PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
