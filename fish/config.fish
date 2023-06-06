@@ -7,7 +7,7 @@ if status is-interactive
     # Aliases #
     ###########
     abbr -ga ff fzf
-    abbr -ga l 'ls -1'
+    abbr -ga l 'ls -l'
     abbr -ga sshgit 'eval $(ssh-agent -c) && ssh-add'
     abbr -ga vim nvim
     abbr -ga nvimrc '$EDITOR ~/.config/nvim'

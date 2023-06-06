@@ -6,11 +6,13 @@
     st = status
     sw = switch
     ch = checkout
+    history = "!git log --oneline | fzf | cut -d ' ' -f '1'"
 
     # commit aliases
     ca      = commit -am
     cm      = commit -m
     cammend = commit -v --no-edit --amend
+    cfix    = commit --fixup
 
     # push aliases
     pushwl = push --force-with-lease
@@ -37,11 +39,12 @@
     tool = fugitive
 
 [mergetool "fugitive"]
-    cmd = nvim -f -c '"set nocursorline"' -c '":set wrap"' -c "Gvdiffsplit!" "$MERGED"
+    cmd = nvim -f -c '"set nocursorline"' -c '":set wrap"' -c "Gvdiffsplit" "$MERGED"
 
 [core]
     editor   = nvim
     autocrlf = input
+    pager    = "less -F -X"
 
 [mergetool]
     keepBackup = false
