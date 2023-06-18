@@ -30,6 +30,7 @@ end
 ### Environment variables setup ###
 ###################################
 
+set -gx SHELL (which fish)
 set -gx EDITOR nvim
 set -gx BAT_THEME Catppuccin-frappe
 set -gx CLICOLOR 1 #enable color for tree
