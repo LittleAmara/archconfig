@@ -22,17 +22,16 @@ return
             comments = { "italic" },
             conditionals = { "italic" },
         },
-        custom_highlights = {
-            Pmenu = {
-                bg = "None"
-            },
-            PmenuSel = {
-                bg = "None"
-            },
-            NormalFloat = {
-                bg = "None"
+        custom_highlights = function(colors)
+            return {
+                Pmenu = { bg = "None" },
+                PmenuSel = { bg = "None" },
+                NormalFloat = { bg = "None" },
+                Number = { fg = colors.flamingo },
+                Boolean = { fg = colors.flamingo },
+                Constant = { fg = colors.sapphire },
             }
-        },
+        end,
         integrations = {
             cmp = true,
             gitsigns = true,
