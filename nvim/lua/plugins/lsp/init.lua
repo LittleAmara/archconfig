@@ -27,12 +27,28 @@ return
                 handlers = handlers
             }, config))
         end
+
+        -- Kinda dirty because it does not apply every time we change the colorscheme, only at startup
+        -- vim.api.nvim_set_hl(0, "@lsp.typemod.macro.defaultLibrary", { link = "@function.macro" }) -- Because we hate orange here
+        -- vim.api.nvim_set_hl(0, "@function.builtin", { fg = "#eebebe" }) -- Orange -> Soft peach
+
     end,
     opts = {
         servers = {
             cmake = {},
             gopls = {},
             tsserver = {},
+            rust_analyzer = {
+                cmd = { "rustup", "run", "stable", "rust-analyzer" },
+                settings = {
+                    ["rust-analyzer"] = {
+                        allFeatures = true,
+                        workbench = {
+                            colorTheme = "Catppuccin",
+                        }
+                    },
+                },
+            },
             clangd = {
                 settings = {
                     ['clangd'] = {
@@ -60,7 +76,7 @@ return
                         },
                     },
                 },
-            }
+            },
         }
     }
 }
