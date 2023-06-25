@@ -1,7 +1,7 @@
 return
 {
     'neovim/nvim-lspconfig',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function(_, opts)
         require('lspconfig.ui.windows').default_options.border = "rounded"
 
@@ -73,6 +73,12 @@ return
                     ['nil'] = {
                         formatting = {
                             command = { "nixpkgs-fmt" },
+                        },
+                        nix = {
+                            flake = {
+                                autoArchive = false, -- I don't need this until the autoEvalInputs in fixed
+                                autoEvalInputs = false, -- Nil doesn't handle well some inputs for the moment
+                            },
                         },
                     },
                 },
