@@ -10,8 +10,6 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-$hg_branch\
-$docker_context\
 $package\
 $c\
 $cmake\
@@ -21,24 +19,37 @@ $line_break \
 $cmd_duration\
 $jobs\
 $status\
-$container\
 $character"""
 
 # ${custom.nix_shell}\
 
 [directory]
-style = "bold sky"
+style = "bold sapphire"
 
 [git_branch]
-style = "bold pink"
+style = "bold blue"
+
+[git_status]
+style = 'bold maroon'
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+success_symbol = '[\$](bold sapphire)' # The "success_symbol" segment is being set to "➜" with the color "bold green"
 error_symbol = "[✗](bold red)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 [nix_shell]
-symbol='❄️ '
+symbol = '❄️ '
+style = 'bold teal'
+
+[python]
+symbol = ' '
+style = 'bold green'
+
+[c]
+style = 'bold green'
+
+[cmake]
+style = 'bold green'
 
 # Custom module that prints the packages installed via nix-shell
 [custom.nix_shell]
