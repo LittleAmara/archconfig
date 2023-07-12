@@ -1,0 +1,83 @@
+@import "mocha.css";
+
+* {
+    font-family: "FiraCode Nerd Font";
+    font-size: 13px;
+}
+
+tooltip {
+    background-color: @surface0;
+    border-radius: 14px;
+    color: @sapphire;
+}
+
+window#waybar {
+    background-color: shade(@base, 0.9);
+    border: 2px solid alpha(@crust, 0.3);
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.modules-center {
+    background-color: @surface0;
+    border-radius: 14px;
+    color: @lavender;
+    padding: 0 10px;
+}
+
+.modules-right {
+    margin-right: 5px;
+    background-color: @surface0;
+    border-radius: 14px;
+    color: @lavender;
+    padding: 0px 5px;
+}
+
+.modules-right * {
+    padding: 0 10px;
+}
+
+#network {
+    color: @red;
+}
+
+#backlight {
+    color: @peach;
+}
+
+#pulseaudio {
+    color: @yellow;
+}
+
+#cpu {
+    color: @rosewater;
+}
+
+#battery {
+    color: @teal;
+}
+
+
+
+/*
+ * Workspaces settings
+ */
+#workspaces {
+    background-color: @surface0;
+    border-radius: 14px;
+    margin-left: 5px;
+    padding: 1px;
+}
+
+#workspaces * {
+    margin: 0px 3px;
+}
+
+#workspaces button.active {
+    color: @sapphire;
+}
+
+#workspaces button {
+    color: @lavender;
+}
