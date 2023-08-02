@@ -1,3 +1,8 @@
+-- Useful variables for java setup
+-- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:gs?/?-?')
+local workspace_dir = '/home/amara/.cache/jdtls/workspaces/' .. project_name
+
 return
 {
     'neovim/nvim-lspconfig',
@@ -38,6 +43,9 @@ return
             cmake = {},
             gopls = {},
             tsserver = {},
+            -- jdtls = {
+            --     cmd = { "jdt-language-server", "-data", workspace_dir}
+            -- },
             rust_analyzer = {
                 cmd = { "rustup", "run", "stable", "rust-analyzer" },
                 settings = {

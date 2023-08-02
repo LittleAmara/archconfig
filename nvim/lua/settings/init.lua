@@ -49,6 +49,13 @@ set.number = true
 -- Set a global statusline, previous one was 2
 set.laststatus = 3
 
+-- Disable language provider support (lua and vimscript plugins only)
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
+
 vim.api.nvim_create_user_command("FormatC", "%!clang-format --style=file %:p", {})
 vim.api.nvim_create_user_command("FormatNix", "silent !nixpkgs-fmt %", {})
 vim.api.nvim_create_user_command("FormatPython", "silent !black -l 120 %", {})
