@@ -16,7 +16,13 @@ return
             "nix",
             "python",
             "terraform",
-            "javascript"
+            "javascript",
+            "markdown",
+            "markdown_inline",
+            "vim",
+            "bash",
+            "regex",
+            "lua",
         },
         sync_install = false,
         highlight = {
