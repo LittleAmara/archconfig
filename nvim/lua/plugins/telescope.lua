@@ -13,7 +13,7 @@ return
         {'<leader>fb', '<cmd>Telescope buffers<cr>', desc = "Telescope buffers"},
         {'<leader>fg', '<cmd>Telescope git_files<cr>', desc = "Telescope git files"},
         {'<leader>fs', '<cmd>Telescope git_status<cr>',desc = "Telescope git status"},
-        {'<leader>gg', '<cmd>Telescope live_grep<cr>', desc = "Telescope live grep"},
+        {'<leader>fG', '<cmd>Telescope live_grep<cr>', desc = "Telescope live grep"},
     },
     opts= {
         defaults = {
