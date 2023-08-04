@@ -76,14 +76,14 @@ return {
             end
 
             dashboard.section.buttons.val = {
-                buttonhl("n", " > New file", "<CMD>ene<CR>"),
-                buttonhl("d", "󰉋 > Open directory", "<CMD>e .<CR>"),
-                buttonhl("f", "󰱽 > Find files", "<CMD>Telescope find_files<CR>"),
-                buttonhl("g", " > Git", "<CMD>G<CR>"),
-                buttonhl("t", " > Telescope", "<CMD>Telescope<CR>"),
-                buttonhl("p", "󰚥 > Plugins", "<CMD>Lazy<CR>"),
-                buttonhl("P", " > Profile", "<CMD>Lazy profile<CR>"),
-                buttonhl("q", " > Quit", "<CMD>qa<CR>"),
+                buttonhl("n", " > New file", "<cmd>ene<cr>"),
+                buttonhl("d", "󰉋 > Open directory", "<cmd>e .<cr>"),
+                buttonhl("f", "󰱽 > Find files", "<cmd>Telescope find_files<cr>"),
+                buttonhl("g", " > Git", "<cmd>Neogit kind=replace<cr>"),
+                buttonhl("t", " > Telescope", "<cmd>Telescope<cr>"),
+                buttonhl("p", "󰚥 > Plugins", "<cmd>Lazy<cr>"),
+                buttonhl("P", " > Profile", "<cmd>Lazy profile<cr>"),
+                buttonhl("q", " > Quit", "<cmd>qa<cr>"),
             }
 
             dashboard.section.header.opts.hl = "Array"
