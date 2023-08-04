@@ -34,9 +34,12 @@ return {
                 mini = {
                     align = "message-right",
                     position = {
-                        row = -1,
+                        row = "95%",
                         col = "100%",
                     },
+                    border = {
+                        style = "rounded"
+                    }
                 }
             },
             lsp = {
@@ -53,5 +56,69 @@ return {
                 lsp_doc_border = false, -- add a border to hover docs and signature help
             },
         },
+    },
+    {
+        "goolord/alpha-nvim",
+        event =  "VimEnter",
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            local alpha = require("alpha")
+            local dashboard = require("alpha.themes.dashboard")
+
+            dashboard.section.header.val = {
+                "",
+                "          ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ",
+                "           ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ",
+                "                 ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ",
+                "                  ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ",
+                "                 ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ",
+                "          ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ",
+                "         ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ",
+                "        ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ",
+                "        ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ",
+                "             ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ",
+                "              ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ",
+                "",
+                "",
+                "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+                "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+                "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+                "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+                "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+                "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+                ""
+            }
+
+            local buttonhl = function(shortcut, text, command)
+                local button = dashboard.button(shortcut, text, command)
+                button.opts.hl_shortcut = "Boolean"
+                button.opts.hl = "Array"
+                return button
+            end
+
+            dashboard.section.buttons.val = {
+                buttonhl("n", " > New file", "<CMD>ene<CR>"),
+                buttonhl("d", "󰉋 > Open directory", "<CMD>e .<CR>"),
+                buttonhl("f", "󰱽 > Find files", "<CMD>Telescope find_files<CR>"),
+                buttonhl("g", " > Git", "<CMD>G<CR>"),
+                buttonhl("t", " > Telescope", "<CMD>Telescope<CR>"),
+                buttonhl("p", "󰚥 > Plugins", "<CMD>Lazy<CR>"),
+                buttonhl("P", " > Profile", "<CMD>Lazy profile<CR>"),
+                buttonhl("q", " > Quit", "<CMD>qa<CR>"),
+            }
+
+            dashboard.section.header.opts.hl = "Array"
+            dashboard.section.footer.opts.hl = "Function"
+
+            dashboard.section.footer.val = {
+                "",
+                "",
+                "Theories are nothing more than words. Accept what you’ve seen.",
+                "",
+                "                                                        – Rintaro Okabe"
+            }
+
+            alpha.setup(dashboard.opts)
+        end
     },
 }

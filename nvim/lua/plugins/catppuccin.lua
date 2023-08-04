@@ -33,6 +33,7 @@ return
             }
         end,
         integrations = {
+            alpha = true,
             cmp = true,
             gitsigns = true,
             telescope = true,
