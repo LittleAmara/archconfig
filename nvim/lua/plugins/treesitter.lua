@@ -1,10 +1,11 @@
 return
 {
     'nvim-treesitter/nvim-treesitter',
+    tag = "v0.9.0",
     build = function()
         require('nvim-treesitter.install').update({ with_sync = true })
     end,
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "CmdlineEnter"},
     opts= {
         ensure_installed = {
             "c",
@@ -22,7 +23,7 @@ return
             "vim",
             "bash",
             "regex",
-            "lua",
+            "lua"
         },
         sync_install = false,
         highlight = {
