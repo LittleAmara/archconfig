@@ -1,7 +1,6 @@
-show=run
-width=750
-height=400
-always_parse_args=true
+show=drun
+width=650
+height=350
 show_all=false
 print_command=true
 insensitive=true
