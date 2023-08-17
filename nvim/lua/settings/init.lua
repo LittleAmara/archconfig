@@ -46,8 +46,9 @@ set.swapfile = false
 set.relativenumber = true
 set.number = true
 
--- Set a global statusline, previous one was 2
-set.laststatus = 3
+-- Set statusline
+set.laststatus = 3 -- Global statusline
+set.statusline = [[%<%f %h%m%r%=%-14.(%l,%c%V%) %y %P]]
 
 -- Disable language provider support (lua and vimscript plugins only)
 vim.g.loaded_perl_provider = 0
