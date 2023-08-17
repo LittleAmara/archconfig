@@ -6,8 +6,12 @@ local workspace_dir = '/home/amara/.cache/jdtls/workspaces/' .. project_name
 return
 {
     'neovim/nvim-lspconfig',
+    dependencies = {
+        { "folke/neodev.nvim"}
+    },
     event = { "BufReadPost", "BufNewFile" },
     config = function(_, opts)
+        require('neodev').setup()
         require('lspconfig.ui.windows').default_options.border = "rounded"
 
         local servers = opts.servers
@@ -33,16 +37,13 @@ return
             }, config))
         end
 
-        -- Kinda dirty because it does not apply every time we change the colorscheme, only at startup
-        -- vim.api.nvim_set_hl(0, "@lsp.typemod.macro.defaultLibrary", { link = "@function.macro" }) -- Because we hate orange here
-        -- vim.api.nvim_set_hl(0, "@function.builtin", { fg = "#eebebe" }) -- Orange -> Soft peach
-
     end,
     opts = {
         servers = {
             cmake = {},
             gopls = {},
             tsserver = {},
+            lua_ls = {},
             -- jdtls = {
             --     cmd = { "jdt-language-server", "-data", workspace_dir}
             -- },
