@@ -6,6 +6,9 @@ return {
             "MunifTanjim/nui.nvim",
         },
         opts = {
+            messages = {
+                enabled = false,
+            },
             cmdline = {
                 view = "cmdline",
             },
