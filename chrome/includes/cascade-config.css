@@ -121,8 +121,8 @@
 
   /*  Allow tabs to have dynamic widths based on
    *  the Tab Bars maximum width
-   */ --uc-active-tab-width:   clamp(100px, 30vw, 300px);
-      --uc-inactive-tab-width: clamp(80px, 30vw, 120px);
+   */ --uc-active-tab-width:   10vw;
+      --uc-inactive-tab-width: 10vw;
 
 
   /*  Enable this to always show the Tab Close button
