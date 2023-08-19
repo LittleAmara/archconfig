@@ -1,7 +1,8 @@
 show=drun
 width=650
-height=350
+height=330
 show_all=false
 print_command=true
 insensitive=true
 prompt=
+no-actions=true
