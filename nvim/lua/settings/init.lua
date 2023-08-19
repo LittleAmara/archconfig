@@ -14,7 +14,7 @@ set.incsearch = true
 
 -- space help
 set.list = true
-set.listchars = 'tab:>-,trail:.'
+set.listchars = "tab:>-,trail:."
 
 -- tab help
 set.expandtab = true
@@ -27,8 +27,8 @@ set.softtabstop = -1
 
 -- menu
 set.wildmenu = true
-set.wildmode = 'longest,full'
-set.completeopt='menu,menuone,noselect'
+set.wildmode = "longest,full"
+set.completeopt = "menu,menuone,noselect"
 
 -- linebreak
 set.lbr = true
@@ -61,13 +61,13 @@ vim.api.nvim_create_user_command("FormatC", "%!clang-format --style=file %:p", {
 vim.api.nvim_create_user_command("FormatNix", "silent !nixpkgs-fmt %", {})
 vim.api.nvim_create_user_command("FormatPython", "silent !black -l 120 %", {})
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.nix"},
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.nix" },
   command = "set shiftwidth=2",
 })
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = {"*.[hc]"},
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.[hc]" },
   command = "set comments=s:/*,mb:**,ex:*/,://,:///",
 })
 
@@ -78,20 +78,18 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 --   command = "silent !nixpkgs-fmt <afile>",
 -- })
 
-vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = {"*.fish"},
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.fish" },
   command = "silent !fish_indent -w <afile>",
 })
 
-vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = {"*.py"},
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.py" },
   command = "silent !black <afile>",
 })
 
-
 -- Auto reload file when nvim resumes from a suspend state
 vim.api.nvim_create_autocmd({ "VimResume" }, {
-    command = "silent checktime",
-    pattern = { "*" },
+  command = "silent checktime",
+  pattern = { "*" },
 })
-
