@@ -59,6 +59,7 @@ set -gx NODE_PATH ~/.npm-packages/lib/node_modules
 
 fish_add_path ~/.local/bin
 fish_add_path ~/.npm-packages/bin
+fish_add_path ~/.cargo/bin
 
 
 ############################
