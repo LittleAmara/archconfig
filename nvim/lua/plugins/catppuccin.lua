@@ -29,6 +29,7 @@ return {
         Number = { fg = colors.flamingo },
         Boolean = { fg = colors.flamingo },
         Constant = { fg = colors.sapphire },
+        FloatBorder = { fg = colors.mauve },
       }
     end,
     integrations = {

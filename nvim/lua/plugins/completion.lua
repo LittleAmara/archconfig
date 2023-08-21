@@ -88,7 +88,7 @@ return {
               return vim_item
             end
           end
-          return require("lspkind").cmp_format({ with_text = flas })(entry, vim_item)
+          return require("lspkind").cmp_format({ with_text = false })(entry, vim_item)
         end,
       },
       window = {

@@ -1,7 +1,7 @@
 return {
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
@@ -57,6 +57,7 @@ return {
   },
   {
     "goolord/alpha-nvim",
+    enabled = false,
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
