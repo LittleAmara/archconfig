@@ -57,26 +57,29 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
 
-vim.api.nvim_create_user_command("FormatC", "%!clang-format --style=file %:p", {})
-vim.api.nvim_create_user_command("FormatNix", "silent !nixpkgs-fmt %", {})
-vim.api.nvim_create_user_command("FormatPython", "silent !black -l 120 %", {})
+-- Disable builtins plugins that I don't use
+vim.g.loaded_gzip = 0
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = { "*.nix" },
-  command = "set shiftwidth=2",
-})
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_2html_plugin = 1
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = { "*.[hc]" },
-  command = "set comments=s:/*,mb:**,ex:*/,://,:///",
-})
+vim.g.loaded_matchit = 1
+vim.g.loaded_matchparen = 1
+vim.g.loaded_logiPat = 1
+vim.g.loaded_rrhelper = 1
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
 
 -- Apply automatically formatter
-
--- vim.api.nvim_create_autocmd({"BufWritePost"}, {
---   pattern = {"*.nix"},
---   command = "silent !nixpkgs-fmt <afile>",
--- })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.fish" },
@@ -93,3 +96,62 @@ vim.api.nvim_create_autocmd({ "VimResume" }, {
   command = "silent checktime",
   pattern = { "*" },
 })
+
+-- Pretty printing for debug
+P = function(v)
+  print(vim.inspect(v))
+  return v
+end
+
+local function popupCompileCommand()
+  -- Define the size of the floating window
+  local width = 50
+  local height = 1
+  local prompt_prefix = "> "
+
+  -- Create the prompt buffer that will be displayed
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
+  vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+
+  -- Config the prompt
+  vim.fn.prompt_setprompt(buf, prompt_prefix)
+  vim.fn.prompt_setcallback(buf, function(input)
+    vim.opt.makeprg = input
+    vim.cmd("close!")
+  end)
+
+  -- Get the current UI
+  local ui = vim.api.nvim_list_uis()[1]
+
+  -- Create the floating window
+  local opts = {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = (ui.width / 2) - (width / 2),
+    row = (ui.height / 3) - (height / 3),
+    style = "minimal",
+    border = "rounded",
+    title = { { " Compile Command ", "FloatBorder" } },
+    title_pos = "center",
+  }
+
+  -- Creating the window
+  local win = vim.api.nvim_open_win(buf, true, opts)
+  vim.cmd("startinsert")
+
+  -- Update the prompt with the current makeprg
+  vim.defer_fn(function()
+    local current_makeprg = vim.opt.makeprg:get()
+    vim.api.nvim_buf_set_text(buf, 0, #prompt_prefix, 0, #prompt_prefix, { current_makeprg })
+    vim.api.nvim_win_set_cursor(win, { 1, #prompt_prefix + #current_makeprg + 1 })
+  end, 0)
+
+  -- Useful bindings
+  vim.keymap.set("n", "<esc>", "<cmd>close!<cr>", { silent = true, buffer = buf })
+  vim.keymap.set("n", "q", "<cmd>close!<cr>", { silent = true, buffer = buf })
+end
+
+vim.keymap.set("n", "<leader>m", popupCompileCommand, {})
+--FloatInit()
