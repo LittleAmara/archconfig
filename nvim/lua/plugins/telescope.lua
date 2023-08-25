@@ -8,11 +8,12 @@ return {
   cmd = "Telescope",
   keys = {
     { "<leader>t", "<cmd>Telescope<cr>", desc = "Telescope" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find file" },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
-    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
-    { "<leader>fs", "<cmd>Telescope git_status<cr>", desc = "Telescope git status" },
+    { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Telescope find file" },
+    { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
+    { "<leader><space>", "<cmd>Telescope git_files<cr>", desc = "Telescope git files" },
+    { "<leader>s", "<cmd>Telescope git_status<cr>", desc = "Telescope git status" },
     { "<leader>G", "<cmd>Telescope live_grep<cr>", desc = "Telescope live grep" },
+    { "<leader>h", "<cmd>Telescope help_tags<cr>", desc = "Telescope help tags" },
   },
   opts = {
     defaults = {
@@ -27,6 +28,13 @@ return {
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git" },
         theme = "ivy",
+      },
+      git_files = {
+        theme = "ivy",
+      },
+      help_tags = {
+        theme = "dropdown",
+        previewer = false,
       },
     },
   },
