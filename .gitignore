@@ -1,1 +1,4 @@
+# Neovim related ignores
+
 nvim/plugin
+.luarc.json
