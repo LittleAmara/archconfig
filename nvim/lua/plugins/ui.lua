@@ -120,4 +120,159 @@ return {
       alpha.setup(dashboard.opts)
     end,
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      local lualine = require("lualine")
+      local colors = require("catppuccin.palettes").get_palette("frappe")
+
+      -- Utils fonctions
+      local conditions = {
+        buffer_not_empty = function()
+          return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+        end,
+        hide_in_width = function()
+          return vim.fn.winwidth(0) > 80
+        end,
+        check_git_workspace = function()
+          local filepath = vim.fn.expand("%:p:h")
+          local gitdir = vim.fn.finddir(".git", filepath .. ";")
+          return gitdir and #gitdir > 0 and #gitdir < #filepath
+        end,
+      }
+
+      local config = {
+        options = {
+          -- Disable sections and component separators
+          component_separators = "",
+          section_separators = "",
+          icons_enabled = true,
+          theme = {
+            normal = { c = { fg = colors.text, bg = colors.mantle } },
+            inactive = { c = { fg = colors.text, bg = colors.mantle } },
+          },
+        },
+        sections = {
+          -- these are to remove the defaults
+          lualine_a = {},
+          lualine_b = {},
+          lualine_y = {},
+          lualine_z = {},
+          -- These will be filled later
+          lualine_c = {},
+          lualine_x = {},
+        },
+        inactive_sections = {
+          -- these are to remove the defaults
+          lualine_a = {},
+          lualine_b = {},
+          lualine_y = {},
+          lualine_z = {},
+          lualine_c = {},
+          lualine_x = {},
+        },
+      }
+
+      -- Inserts a component in lualine_c at left section
+      local function ins_left(component)
+        table.insert(config.sections.lualine_c, component)
+      end
+
+      -- Inserts a component in lualine_x at right section
+      local function ins_right(component)
+        table.insert(config.sections.lualine_x, component)
+      end
+
+      -- Left section
+      ins_left({
+        -- mode component
+        "mode",
+        color = function()
+          -- auto change color according to neovims mode
+          local mode_color = {
+            n = colors.red,
+            i = colors.teal,
+            v = colors.blue,
+            [""] = colors.blue,
+            V = colors.blue,
+            c = colors.pink,
+            no = colors.red,
+            s = colors.peach,
+            S = colors.peach,
+            [""] = colors.peach,
+            ic = colors.yellow,
+            R = colors.mauve,
+            Rv = colors.mauve,
+            cv = colors.red,
+            ce = colors.red,
+            r = colors.teal,
+            rm = colors.teal,
+            ["r?"] = colors.teal,
+            ["!"] = colors.red,
+            t = colors.red,
+          }
+          return { fg = mode_color[vim.fn.mode()] }
+        end,
+        padding = { left = 1, right = 1 },
+      })
+
+      ins_left({
+        "branch",
+        icon = "",
+        color = { fg = colors.blue, gui = "bold" },
+      })
+
+      ins_left({ "location" })
+
+      ins_left({ "progress", color = { fg = colors.text, gui = "bold" } })
+
+      ins_left({
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        symbols = { error = " ", warn = " ", info = " " },
+        diagnostics_color = {
+          color_error = { fg = colors.red },
+          color_warn = { fg = colors.yellow },
+          color_info = { fg = colors.teal },
+        },
+      })
+
+      -- Mid section
+      ins_left({
+        function()
+          return "%="
+        end,
+      })
+
+      ins_left({
+        "filename",
+        cond = conditions.buffer_not_empty,
+        color = { fg = colors.mauve, gui = "bold" },
+        path = 1,
+      })
+
+      -- Right section
+      ins_right({
+        "filetype",
+      })
+
+      ins_right({
+        "o:encoding",
+        fmt = string.upper,
+        cond = conditions.hide_in_width,
+        color = { fg = colors.blue, gui = "bold" },
+      })
+
+      ins_right({
+        "fileformat",
+        fmt = string.upper,
+        color = { fg = colors.blue, gui = "bold" },
+      })
+
+      lualine.setup(config)
+    end,
+  },
 }
