@@ -7,7 +7,7 @@
 
 tooltip {
     background-color: @surface0;
-    border-radius: 14px;
+    border-radius: 10px;
     color: @sapphire;
 }
 
@@ -21,7 +21,7 @@ window#waybar {
 
 .modules-center {
     background-color: @surface0;
-    border-radius: 14px;
+    border-radius: 10px;
     color: @lavender;
     padding: 0 10px;
 }
@@ -29,7 +29,7 @@ window#waybar {
 .modules-right {
     margin-right: 5px;
     background-color: @surface0;
-    border-radius: 14px;
+    border-radius: 10px;
     color: @lavender;
     padding: 0px 5px;
 }
@@ -65,7 +65,7 @@ window#waybar {
  */
 #workspaces {
     background-color: @surface0;
-    border-radius: 14px;
+    border-radius: 10px;
     margin-left: 5px;
     padding: 1px;
 }
