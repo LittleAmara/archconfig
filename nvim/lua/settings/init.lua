@@ -105,7 +105,7 @@ end
 
 local function popupCompileCommand()
   -- Define the size of the floating window
-  local width = 50
+  local width = 60
   local height = 1
   local prompt_prefix = "> "
 
@@ -153,5 +153,6 @@ local function popupCompileCommand()
   vim.keymap.set("n", "q", "<cmd>close!<cr>", { silent = true, buffer = buf })
 end
 
-vim.keymap.set("n", "<leader>m", popupCompileCommand, {})
---FloatInit()
+--vim.keymap.set("n", "<leader>m", popupCompileCommand, {})
+-- TODO: add the same with a runprg variable
+-- TODO: add asynchronous jobs to run and compile (and pipe)

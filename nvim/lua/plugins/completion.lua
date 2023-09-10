@@ -100,6 +100,12 @@ return {
           border = border,
         },
       },
+      enabled = function()
+        if vim.bo.filetype == "TelescopePrompt" then
+          return false
+        end
+        return true
+      end,
     }
   end,
 }

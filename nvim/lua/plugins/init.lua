@@ -2,6 +2,7 @@ return {
   { "folke/lazy.nvim" },
   {
     "christoomey/vim-tmux-navigator",
+    enabled = false,
     lazy = false,
     keys = {
       { "<C-w>h", "<cmd>TmuxNavigateLeft<cr>", desc = "Switch to left pane" },
