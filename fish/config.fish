@@ -53,7 +53,10 @@ set -gx LESS_TERMCAP_us (printf "\033[01;4;31m")
 set -gx PGDATA "$HOME/postgres_data"
 set -gx PGHOST /tmp
 
+set -gx MANROFFOPT -c
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
+set -gx CARGO_TERM_COLOR always
 
 set -gx NODE_PATH ~/.npm-packages/lib/node_modules
 
