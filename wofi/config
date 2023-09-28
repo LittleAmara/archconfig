@@ -1,6 +1,6 @@
 show=drun
-width=650
-height=330
+width=500
+height=200
 show_all=false
 print_command=true
 insensitive=true

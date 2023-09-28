@@ -4,7 +4,9 @@
 @define-color bg2 #51576d;
 
  * {
+    all: initial;
     font-family: 'FiraCode Nerd Font', monospace;
+    font-weight: normal;
     font-size: 13px;
  }
 
@@ -13,7 +15,7 @@
     margin: 0px;
     padding: 10px;
     border: 2px solid @accent;
-    border-radius: 7px;
+    border-radius: 5px;
     background-color: @bg;
     animation: slideIn 0.1s ease-in-out both;
  }
@@ -52,24 +54,22 @@
  /* Outer Box */
  #outer-box {
     margin: 5px;
-    padding: 10px;
-    border: none;
     background-color: @bg;
  }
 
  /* Scroll */
  #scroll {
     margin: 0px;
-    padding: 10px;
-    border: none;
+    padding: 0px;
  }
 
  /* Input */
  #input {
+    border-radius: 5px;
     margin: 5px;
     padding: 5px;
     border: none;
-    color: @accent;
+    color: @txt;
     background-color: @bg2;
     animation: fadeIn 0.1s ease-in-out both;
     font-size: 15px;
@@ -78,7 +78,7 @@
  /* Text */
  #text {
     margin: 5px;
-    padding: 3px;
+    padding: 1px;
     border: none;
     color: @txt;
     animation: fadeIn 0.1s ease-in-out both;
@@ -87,6 +87,7 @@
  /* Selected Entry */
  #entry:selected {
    background-color: @accent;
+   border-radius: 5px;
  }
 
  #entry:selected #text {
