@@ -1,15 +1,30 @@
-@import "mocha.css";
-
 * {
+    all: unset;
+    font-weight: normal;
     font-family: "FiraCode Nerd Font";
     font-size: 13px;
+    padding: 0;
+    margin: 0;
+    min-height: 25px;
 }
+
+@import "mocha.css";
 
 tooltip {
     background-color: @surface0;
-    border-radius: 10px;
+    border-radius: 5px;
     color: @sapphire;
+    border: 1px solid rgba(100, 114, 125, 0.5);
 }
+
+/* Solid status bar
+window#waybar {
+    background-color: shade(@base, 0.9);
+    background: @surface0;
+    box-shadow: none;
+    border: none;
+    min-height: 250px;
+}*/
 
 window#waybar {
     background-color: shade(@base, 0.9);
@@ -22,7 +37,6 @@ window#waybar {
 .modules-center {
     background-color: @surface0;
     border-radius: 10px;
-    color: @lavender;
     padding: 0 10px;
 }
 
@@ -30,12 +44,15 @@ window#waybar {
     margin-right: 5px;
     background-color: @surface0;
     border-radius: 10px;
-    color: @lavender;
     padding: 0px 5px;
 }
 
 .modules-right * {
     padding: 0 10px;
+}
+
+#clock {
+    color: @lavender;
 }
 
 #network {
@@ -58,8 +75,6 @@ window#waybar {
     color: @teal;
 }
 
-
-
 /*
  * Workspaces settings
  */
@@ -71,7 +86,12 @@ window#waybar {
 }
 
 #workspaces * {
-    margin: 0px 3px;
+    margin: 0px 5px;
+    border-radius: 5px;
+}
+
+#workspaces button:hover {
+    background: @surface1;
 }
 
 #workspaces button.active {
@@ -80,4 +100,20 @@ window#waybar {
 
 #workspaces button {
     color: @lavender;
+}
+
+#tray menu {
+    border: 1px solid alpha(@crust, 0.5);
+    border-radius: 7px;
+    background-color: @surface0;
+}
+
+#tray menu > * {
+    color: @text;
+}
+
+#tray menu > *:hover {
+    color: @sapphire;
+    background: @surface1;
+    border-radius: 7px;
 }
