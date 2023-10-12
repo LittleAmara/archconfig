@@ -85,13 +85,13 @@ __prompt_command() {
     local Red='\[\e[0;31m\]'
     local Green='\[\e[1;32m\]'
     local BYel='\[\e[1;33m\]'
-    local blue='\[\e[1;34m\]'
+    local blue='\[\e[0;34m\]'
     local BBlu='\[\e[1;34m\]'
     local Pink='\[\e[0;35m\]'
     local BPink='\[\e[1;35m\]'
     local Res='\[\e[0m\]'
 
-    PS1=" ${BPink}\w ""$blue"'$(__git_ps1 "on  %s")'
+    PS1=" ${blue}\w ""$BYel"'$(__git_ps1 "on  %s")'
     [[ -n "$VIRTUAL_ENV" ]] && PS1=${PS1}"${Res} via ${BYel}(venv)"
     PS1=${PS1}"\n"
     #[[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
@@ -101,7 +101,7 @@ __prompt_command() {
 
     local nb_jobs=$(jobs | wc -l)
     [[ "$nb_jobs" != 0 ]] && PS1+=" ${BBlu}✦$([ "$nb_jobs" != 1 ] && echo $nb_jobs)"
-    [[ $EXIT != 0 ]] && PS1+=" ${Red}> ${Res}" || PS1+=" ${Green}> ${Res}"
+    [[ $EXIT != 0 ]] && PS1+=" ${Red}\$ ${Res}" || PS1+=" ${blue}\$ ${Res}"
 }
 
 ################################################################################
@@ -116,9 +116,6 @@ fi
 ## Some useful aliases
 
 alias vim='nvim'
-alias fgcc='gcc -Wall -Wextra -Werror -pedantic -std=c99 -fsanitize=address -g'
-alias 'g+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -o out'
-alias 'fg+++'='g++ -Wall -Wextra -Werror -pedantic -std=c++20 -g -fsanitize=address -o out'
 alias sshgit='eval $(ssh-agent) && ssh-add'
 alias ls='ls --color=auto'
 alias tree='tree -C'
@@ -210,6 +207,6 @@ __cd_to_git_root(){
 ## Launch zoxide and prompt
 
 eval "$(zoxide init bash)"
-eval "$(starship init bash)"
+#eval "$(starship init bash)"
 
-#PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
+PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
