@@ -31,15 +31,28 @@ fi
 
 
 ################################################################################
+## Better bash history
+
+shopt -s histappend # do not overwrite history, only append
+shopt -s cmdhist # write multiline command in a single line
+export HISTFILESIZE=10000
+export HISTSIZE=100000
+export HISTCONTROL=ignoreboth # ignore duplicate and line beginning with spaces
+export HISTIGNORE='ls:bg:fg:history:cd:vim:nvim'
+
+
+################################################################################
 ## Variables
 
 export EDITOR="nvim"
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden \
+export FZF_DEFAULT_COMMAND='fd --color=always --type f --strip-cwd-prefix --hidden \
     --exclude .git'
 export FZF_DEFAULT_OPTS="--layout=reverse --height=75% -m \
+    --ansi \
     --bind="ctrl-space:toggle-preview" \
     --preview='bat --color=always {}' \
     --preview-window=:hidden"
+export MANROFFOPT='-c'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Catppuccin-frappe"
 export CLICOLOR=1 #enable color for tree
@@ -62,6 +75,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 ## Path env
 
 PATH=$PATH:~/.local/bin
+PATH=$PATH:/usr/bin
 PATH=~/.npm-packages/bin:$PATH
 export NODE_PATH=~/.npm-packages/lib/node_modules
 
@@ -86,6 +100,7 @@ __prompt_command() {
     local Green='\[\e[1;32m\]'
     local BYel='\[\e[1;33m\]'
     local blue='\[\e[0;34m\]'
+    local cyan='\[\e[0;36m\]'
     local BBlu='\[\e[1;34m\]'
     local Pink='\[\e[0;35m\]'
     local BPink='\[\e[1;35m\]'
@@ -93,8 +108,9 @@ __prompt_command() {
 
     PS1=" ${blue}\w ""$BYel"'$(__git_ps1 "on  %s")'
     [[ -n "$VIRTUAL_ENV" ]] && PS1=${PS1}"${Res} via ${BYel}(venv)"
+    [[ -n "$IN_NIX_SHELL" ]] && PS1+="${cyan} via ❄️ ($name)${Res}"
     PS1=${PS1}"\n"
-    #[[ -n "$NIX_SHELL_BASH_NAME" ]] && PS1="${Green}[$NIX_SHELL_BASH_NAME]${Res}"$PS1
+
     #local nixshell=$(echo $buildInputs | tr ' ' '\n' | sed 's#^/nix/store/[a-z0-9]\+-##' \
     #    | tr -d '0-9-.' | tr '\n' ' ' | awk '{$1=$1;print}')
     #[[ -n "$buildInputs" ]] && PS1="${Green}[$nixshell]${Res}"$PS1
@@ -145,10 +161,10 @@ alias gcd='__cd_to_git_root'
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 bind -x '"\C-o":__nvim_with_fzf'
-bind '"\C-f":"__cd_with_fzf"'
+#bind '"\C-f":"__cd_with_fzf"'
+bind -x '"\C-f":__select_with_fzf'
 bind '"\C-H":backward-kill-line'
 # lolo=$(fzf); if [ -z $lolo ]; then echo 'no file has been picked'; else vim $lolo; fi
-
 
 ################################################################################
 ## Autocompletion
@@ -158,6 +174,12 @@ bind '"\C-H":backward-kill-line'
 
 ################################################################################
 ## Functions
+
+__select_with_fzf(){
+    local selected="$(fzf | while read -r item; do printf '%q ' "$item"; done)";
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}";
+    READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
+}
 
 __cd_with_fzf(){
     #local PATHNAME=$(cd && fd -t d --strip-cwd-prefix | \
@@ -181,16 +203,6 @@ __cd_with_fzf(){
     [[ -z "$PATHNAME" ]] || cd ~/"$PATHNAME"
 }
 
-__nvim_with_fzf(){
-    if [[ "$#" -eq 0 ]]
-    then
-        local FILE=$(fzf)
-        [[ -z "$FILE" ]] || "$EDITOR" "$FILE"
-    else
-        "$EDITOR" "$@"
-    fi
-}
-
 __cd_to_git_root(){
     local Red='\e[0;31m'
     local BBlu='\e[1;34m'
@@ -198,8 +210,6 @@ __cd_to_git_root(){
 
     local GITROOT=$(git rev-parse --show-toplevel 2>/dev/null)
     [[ -n "$GITROOT" ]] && builtin -- cd "$GITROOT" && echo -e " ✨ ${BBlu}Now at the git root${Res} ✨" || echo -e ${Red}"✗ Not in a git repository ✗ ${Res}"
-
-
 }
 
 
