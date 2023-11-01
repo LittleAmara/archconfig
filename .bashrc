@@ -94,7 +94,6 @@ source ~/.config/.git-prompt.sh
 
 __prompt_command() {
     local EXIT="$?"
-    PS1=""
 
     local Red='\[\e[0;31m\]'
     local Green='\[\e[1;32m\]'
@@ -106,8 +105,9 @@ __prompt_command() {
     local BPink='\[\e[1;35m\]'
     local Res='\[\e[0m\]'
 
-    PS1=" ${blue}\w ""$BYel"'$(__git_ps1 "on  %s")'
-    [[ -n "$VIRTUAL_ENV" ]] && PS1=${PS1}"${Res} via ${BYel}(venv)"
+    PS1=" ${blue}\w"
+    PS1+=" $cyan"'$(__git_ps1 "on  %s")'
+    [[ -n "$VIRTUAL_ENV" ]] && PS1=${PS1}"${Green} via ($(basename -- "$VIRTUAL_ENV"))"
     [[ -n "$IN_NIX_SHELL" ]] && PS1+="${cyan} via ❄️ ($name)${Res}"
     PS1=${PS1}"\n"
 
@@ -154,6 +154,10 @@ alias ga='git add'
 alias gcm='git commit -m'
 alias gpl='git pull'
 alias gcd='__cd_to_git_root'
+
+alias k='kubectl'
+alias kcx='kubectx'
+alias kns='kubens'
 
 ################################################################################
 ## Custom bindings
