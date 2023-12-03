@@ -1,7 +1,7 @@
 {
     "modules-left": ["wlr/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["network", "backlight", "pulseaudio", "cpu", "battery", "tray"],
+    "modules-center": [],
+    "modules-right": ["network", "backlight", "pulseaudio", "cpu", "battery", "clock", "tray"],
     "battery": {
         "interval": 10,
         "format-charging": "{capacity}% 󰂄",
@@ -9,7 +9,8 @@
         "format-icons": ["", "", "", "", ""]
     },
     "clock": {
-        "format": "{:%a %d %b  %H:%M:%S}",
+        "format": "{:%H:%M}",
+        "tooltip-format": "{:%a %d %b  %H:%M:%S}",
         "interval": 5
     },
     "hyprland/window": {
