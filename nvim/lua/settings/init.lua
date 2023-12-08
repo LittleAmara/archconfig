@@ -3,7 +3,7 @@ local set = vim.opt
 set.termguicolors = true
 
 -- mouse
-set.mouse = "a"
+set.mouse = ""
 
 -- search help
 set.ignorecase = true
@@ -49,6 +49,9 @@ set.number = true
 -- Set statusline
 set.laststatus = 3 -- Global statusline
 set.statusline = [[%<%f %h%m%r%=%-14.(%l,%c%V%) %y %P]]
+
+-- Make the cmdline overlap the statusline when active
+set.cmdheight = 0
 
 -- Disable language provider support (lua and vimscript plugins only)
 vim.g.loaded_perl_provider = 0

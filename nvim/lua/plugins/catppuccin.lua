@@ -9,7 +9,7 @@ return {
     vim.cmd.colorscheme("catppuccin")
   end,
   opts = {
-    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
     background = { -- h: background
       light = "latte",
       dark = "mocha",
@@ -29,7 +29,7 @@ return {
         Number = { fg = colors.flamingo },
         Boolean = { fg = colors.flamingo },
         Constant = { fg = colors.sapphire },
-        FloatBorder = { fg = colors.mauve },
+        FloatBorder = { fg = colors.maroon },
       }
     end,
     integrations = {
@@ -39,6 +39,7 @@ return {
       telescope = true,
       treesitter = true,
       noice = true,
+      flash = true,
     },
   },
 }

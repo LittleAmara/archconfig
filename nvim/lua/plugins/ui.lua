@@ -116,6 +116,7 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    enabled = false,
     config = function()
       local lualine = require("lualine")
       local colors = require("catppuccin.palettes").get_palette("frappe")

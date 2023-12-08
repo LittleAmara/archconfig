@@ -12,6 +12,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Lua initialization file
+vim.g.moonflyTransparent = true
+
 require("settings")
 require("lazy-config")
 require("keymaps")

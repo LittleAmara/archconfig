@@ -27,10 +27,12 @@ return {
     pickers = {
       find_files = {
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git" },
-        theme = "ivy",
+        theme = "dropdown",
+        previewer = false,
       },
       git_files = {
-        theme = "ivy",
+        theme = "dropdown",
+        previewer = false,
       },
       help_tags = {
         theme = "dropdown",
