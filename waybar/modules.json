@@ -1,5 +1,5 @@
 {
-    "modules-left": ["wlr/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": [],
     "modules-right": ["network", "backlight", "pulseaudio", "cpu", "battery", "clock", "tray"],
     "battery": {
@@ -12,10 +12,6 @@
         "format": "{:%H:%M}",
         "tooltip-format": "{:%a %d %b  %H:%M:%S}",
         "interval": 5
-    },
-    "hyprland/window": {
-        "format": "{}",
-        "separate-outputs": true
     },
     "cpu": {
         "interval": 10,
@@ -39,7 +35,7 @@
         "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
         "format-icons": {
@@ -51,7 +47,8 @@
             "urgent": "",
             "default": ""
         },
-        "sort-by-number": true
+        "sort-by-number": true,
+        "show-special": false
     },
     "backlight": {
         "device": "intel_backlight",

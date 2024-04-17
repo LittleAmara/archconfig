@@ -102,7 +102,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: @sapphire;
+    color: @peach;
 }
 
 #workspaces button {

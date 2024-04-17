@@ -1,8 +1,8 @@
 configuration{
     modi: "run,drun,window";
+    icon-theme: "Oranchelo";
     show-icons: true;
-    icon-theme: "Qogir";
-    terminal: "kitty";
+    terminal: "alacritty";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;
@@ -14,4 +14,4 @@ configuration{
     sidebar-mode: true;
 }
 
-@import "~/.config/rofi/catppuccin-frappe.rasi"
+@theme "catppuccin-frappe"
