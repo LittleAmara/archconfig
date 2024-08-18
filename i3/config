@@ -13,8 +13,20 @@ set $mod Mod4
 #border indicator on windows:
 # new_window pixel 1
 
-# jgaps inner 6
-# jgaps outer 3
+# gaps inner 6
+# gaps outer 3
+
+# Sounds keybinds
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrevious exec playerctl previous
+
+# Backlight keybinds
+bindsym xf86monbrightnessup exec brightnessctl s +2%
+bindsym xf86monbrightnessdown exec brightnessctl s 2%-
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -43,9 +55,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 # exec --no-startup-id amixer -q sset Master 0%
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 1%+ && pkill -SIGRTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 1%- && pkill -SIGRTMIN+2 i3blocks
-bindsym XF86AudioMute exec amixer -q sset Master toggle && pkill -SIGRTMIN+2 i3blocks
+# bindsym XF86AudioRaiseVolume exec amixer -q sset Master 1%+ && pkill -SIGRTMIN+2 i3blocks
+# bindsym XF86AudioLowerVolume exec amixer -q sset Master 1%- && pkill -SIGRTMIN+2 i3blocks
+# bindsym XF86AudioMute exec amixer -q sset Master toggle && pkill -SIGRTMIN+2 i3blocks
 #bindsym XF86AudioMicMute exec amixer -q sset Master toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -64,7 +76,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+n exec kitty --title notes .local/bin/notetaker.sh
 
 # Toggle polyabars
-bindsym $mod+z exec polybar-msg cmd toggle
+# bindsym $mod+z exec polybar-msg cmd toggle
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -78,31 +90,31 @@ bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+semicolon focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # move focused window
-#bindsym $mod+Shift+j move left
-#bindsym $mod+Shift+k move down
-#bindsym $mod+Shift+l move up
-#bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
 
 # move focused container
-bindsym $mod+x move container to output right left
+bindsym $mod+z move container to output right left
 #bindsym $mod+Ctrl+Shift+Right move container to output right
 #bindsym $mod+Ctrl+Shift+Down move container to output down
 #bindsym $mod+Ctrl+Shift+Up move container to output up
@@ -183,7 +195,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+l exec xflock4
+bindsym $mod+x exec betterlockscreen --lock
 
 # bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 # bindsym $mod+Shift+e exec xfce4-session-logout
