@@ -11,7 +11,7 @@
 set $mod Mod4
 
 #border indicator on windows:
-# new_window pixel 1
+default_border pixel 5
 
 # gaps inner 6
 # gaps outer 3
@@ -67,13 +67,13 @@ floating_modifier $mod
 # bindsym $mod+Return exec kitty -o 'shell_integration no-cursor'
 
 # Start a terminal in fullscreen
-bindsym $mod+Shift+Return exec kitty --title kitty_full
+bindsym $mod+Shift+Return exec kitty --title kitty_float
 
 # Start a terminal
 bindsym $mod+Return exec kitty
 
 # Start a temrinal for notetaking
-bindsym $mod+n exec kitty --title notes .local/bin/notetaker.sh
+# bindsym $mod+n exec kitty --title notes .local/bin/notetaker.sh
 
 # Toggle polyabars
 # bindsym $mod+z exec polybar-msg cmd toggle
@@ -90,10 +90,10 @@ bindsym $mod+d exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -102,10 +102,10 @@ bindsym $mod+semicolon focus right
 # bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Shift+Left move left
@@ -121,10 +121,10 @@ bindsym $mod+z move container to output right left
 #bindsym $mod+Ctrl+Shift+Left move container to output left
 
 # split in horizontal orientation
-bindsym $mod+h split h
+# bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -144,7 +144,7 @@ bindsym $mod+space floating toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -159,10 +159,11 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-for_window [title="^kitty_full$"] fullscreen enable;
-for_window [title="^notes$"] floating enable, resize set 1100px 800px, move position center;
-for_window [class="Pavucontrol"] floating enable, border normal;
-for_window [class="Spotify"] move to workspace $ws10, focus;
+for_window [title="^kitty_float$"] floating enable, resize set 1100px 800px, border pixel 1, move position center;
+for_window [class="pavucontrol"] floating enable, resize set 1100px 600px, border normal, move position center;
+# for_window [class="Spotify"] move to workspace $ws10, focus;
+for_window [class=".*" tiling] border pixel 1;
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
