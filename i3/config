@@ -11,10 +11,10 @@
 set $mod Mod4
 
 #border indicator on windows:
-new_window pixel 1
+# new_window pixel 1
 
-gaps inner 6
-gaps outer 3
+# jgaps inner 6
+# jgaps outer 3
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -123,10 +123,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -137,18 +137,19 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
-set $ws2 "  2  "
-set $ws3 "  3  "
-set $ws4 "  4  "
-set $ws5 "  5  "
-set $ws6 "  6  "
-set $ws7 "  7  "
-set $ws8 "  8  "
-set $ws9 "  9  "
-set $ws10 "  10  "
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 for_window [title="^kitty_full$"] fullscreen enable;
 for_window [title="^notes$"] floating enable, resize set 1100px 800px, move position center;
+for_window [class="Pavucontrol"] floating enable, border normal;
 for_window [class="Spotify"] move to workspace $ws10, focus;
 
 # switch to workspace
@@ -175,74 +176,16 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# Define colors variables:
-#set $darkbluetrans	#08052be6
-#set $darkblue		#08052b
-#set $lightblue		#5294e2
-#set $urgentred		#e53935
-#set $white		#ffffff
-#set $black		#000000
-#set $purple		#e345ff
-#set $light_purple #cfbafa
-#set $darkgrey		#383c4a
-#set $grey		#b0b5bd
-#set $mediumgrey		#8b8b8b
-#set $yellowbrown	#e1b700
-
-# Define catppuccin frappe colors: 
-set $rosewater #f2d5cf
-set $flamingo  #eebebe
-set $pink      #f4b8e4
-set $mauve     #ca9ee6
-set $red       #e78284
-set $maroon    #ea999c
-set $peach     #ef9f76
-set $green     #a6d189
-set $teal      #81c8be
-set $sky       #99d1db
-set $sapphire  #85c1dc
-set $blue      #8caaee
-set $lavender  #babbf1
-set $text      #c6d0f5
-set $subtext1  #b5bfe2
-set $subtext0  #a5adce
-set $overlay2  #949cbb
-set $overlay1  #838ba7
-set $overlay0  #737994
-set $surface2  #626880
-set $surface1  #51576d
-set $surface0  #414559
-set $base      #303446
-set $mantle    #292c3c
-set $crust     #232634
-
-# Define colors for your windows:
-# target                 title     bg    text   indicator  border
-client.focused           $pink     $base $text  $rosewater $pink
-client.focused_inactive  $mauve    $base $text  $rosewater $mauve
-client.unfocused         $mauve    $base $text  $rosewater $mauve
-client.urgent            $peach    $base $peach $overlay0  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-client.background        $base
-
-# define colors for windows:
-#class                  border          bground         text        indicator       child_border
-#client.focused          $light_purple   $light_purple   $darkgrey   $darkgrey       $darkgrey
-#client.unfocused        $darkblue       $darkblue       $darkgrey   $darkblue       $darkblue
-#client.focused_inactive $darkblue       $darkblue       $darkgrey   $mediumgrey     $black
-#client.urgent           $urgentred      $urgentred      $darkgrey   $mediumgrey     $yellowbrown
-
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+l exec xflock4
 
-bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
+# bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 # bindsym $mod+Shift+e exec xfce4-session-logout
 
 # resize window (you can also use the mouse for that)
@@ -277,33 +220,24 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#     font pango:Fira Code Mono 9, FontAwesome 9
-# 
-#         status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#         position top
-#         #tray_output eDP1
-#         #tray_padding 0
-# 
-#         strip_workspace_name no
-# 
-#         colors {
-#             separator          #f1fa8c
-#                 background         #212733
-#                 statusline         $white
-#                                         # border        bg              txt         indicator
-#                 focused_workspace       #cfbafa         #cfbafa         #212733     #cfbafa
-#                 active_workspace        #cfbafa         #212733         #cfbafa     $purple
-#                 inactive_workspace      #212733         #212733         #cfbafa     $purple
-#                 urgent_workspace        #ed8274         #ed8274         #cfbafa     $purple
-#         }
-# }
+bar {
+        font pango:Fira Code Mono 9, FontAwesome 9
+
+        status_command i3status
+
+        #tray_output eDP1
+        #tray_padding 0
+        #strip_workspace_name no
+}
 
 # Enable transparency
-exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
+# exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Launch polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Set wallpaper
 exec_always --no-startup-id sleep 0.5 && nitrogen --restore
+
+# Configure keystroke delay
+exec_always --no-startup-id xset r rate 300 50
