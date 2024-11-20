@@ -1,16 +1,11 @@
 # Font settings
 
-font_family      SF Mono
-italic_font      SF Mono Regular Italic
-bold_font        SF Mono Bold
-bold_italic_font SF Mono Bold Italic
-
-
+font_family      Hasklig
 # italic_font      Fira Sans Italic
 # bold_font        FiraCode Nerd Font Ret
 # bold_italic_font Fira Sans Italic
 
-font_size 11
+font_size 13
 
 # Cursor settings
 
@@ -42,8 +37,8 @@ bell_on_tab                     "🔔 "
 
 kitty_mod alt
 
-map kitty_mod+c  copy_to_clipboard
-map kitty_mod+v  paste_from_clipboard
+map kitty_mod+c copy_to_clipboard
+map kitty_mod+v paste_from_clipboard
 map kitty_mod+s  paste_from_selection
 map shift+insert paste_from_selection
 #map kitty_mod+enter new_tab
@@ -71,31 +66,94 @@ map kitty_mod+6 no_op
 map kitty_mod+7 no_op
 map kitty_mod+8 no_op
 map kitty_mod+9 no_op
-map ctrl+i no_op
 
 
 
 # General settings
+
 enable_audio_bell no
 confirm_os_window_close 0
 background_opacity 1
 shell /usr/bin/env zsh
 editor nvim
-paste_actions quote-urls-at-prompt
+
+#window_border_width 20
 
 # disable any padding
 draw_minimal_borders yes
-window_border_width 0px
+window_border_width 0
 window_margin_width 0
 window_padding_width 0
-hide_window_decorations yes
-
-
-# at 100% kitty draws a small border around the window (maybe only work on 1920x1080)
-#adjust_line_height  110% 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Mocha
+# kanagawabones
 include current-theme.conf
 # END_KITTY_THEME
 
+# background #061115
+# foreground #D9D7D6
+# cursor #D9D7D6
+# color0 #1C252C
+# color1 #DF5B61
+# color2 #78B892
+# color3 #DE8F78
+# color4 #6791C9
+# color5 #BC83E3
+# color6 #67AFC1
+# color7 #D9D7D6
+# color8 #484e5b
+# color9 #f16269
+# color10 #8cd7aa
+# color11 #e9967e
+# color12 #79aaeb
+# color13 #c488ec
+# color14 #7acfe4
+# color15 #e5e5e5
+
+
+########################################################################33
+
+# vim:ft=kitty
+
+## name: Kanagawa
+## license: MIT
+## author: Tommaso Laurenzi
+## upstream: https://github.com/rebelot/kanagawa.nvim/
+# background #1F1F28
+# foreground #DCD7BA
+# selection_background #2D4F67
+# selection_foreground #C8C093
+# url_color #72A7BC
+# cursor #C8C093
+
+# Tabs
+# active_tab_background #1F1F28
+# active_tab_foreground #C8C093
+# inactive_tab_background  #1F1F28
+# inactive_tab_foreground #727169
+#tab_bar_background #15161E
+
+# normal
+# color0 #16161D
+# color1 #C34043
+# color2 #76946A
+# color3 #C0A36E
+# color4 #7E9CD8
+# color5 #957FB8
+# color6 #6A9589
+# color7 #C8C093
+
+# bright
+# color8  #727169
+# color9  #E82424
+# color10 #98BB6C
+# color11 #E6C384
+# color12 #7FB4CA
+# color13 #938AA9
+# color14 #7AA89F
+# color15 #DCD7BA
+
+
+# extended colors
+# color16 #FFA066
+# color17 #FF5D62
