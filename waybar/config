@@ -1,7 +1,0 @@
-{
-    "gtk-layer-shell": true,
-    "layer": "top",
-    "position": "bottom",
-    "margin-top": 0,
-    "include": "~/.config/waybar/modules.json"
-}
