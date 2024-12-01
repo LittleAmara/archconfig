@@ -1,4 +1,1 @@
-# Neovim related ignores
-
-nvim/plugin
-.luarc.json
+tmux/plugins
