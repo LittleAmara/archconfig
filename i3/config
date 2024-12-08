@@ -21,7 +21,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrevious exec playerctl previous
+bindsym XF86AudioPrev exec playerctl previous
 
 # Backlight keybinds
 bindsym XF86MonBrightnessUp exec brightnessctl s +2%
