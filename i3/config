@@ -108,7 +108,7 @@ bindsym $mod+c move scratchpad
 bindsym $mod+f fullscreen toggle
 
 # take a screenshot
-bindsym $mod+Shift+s exec maim -s | tee ~/Pictures/screenshots/$(date +'%F|%T.png') | xclip -selection clipboard -t image/png
+bindsym $mod+Shift+s exec maim -s | tee ~/Pictures/screenshots/$(date +'%F-%T.png') | xclip -selection clipboard -t image/png
 # bindsym $mod+Shift+s exec maim -s ~/Pictures/screenshots/$(date +'%F|%T.png')
 
 # change container layout (stacked, tabbed, toggle split)
