@@ -152,7 +152,7 @@ configure_app() {
     install_config "$config_path" "${REPO_PATH}/$app"
     set +e
 
-    local check_additional_setup="$(type 'additional_setup')"
+    local check_additional_setup="$(type 'additional_setup' 2>&1)"
 
     case "$check_additional_setup" in
         *function*) additional_setup && unset additional_setup;;
